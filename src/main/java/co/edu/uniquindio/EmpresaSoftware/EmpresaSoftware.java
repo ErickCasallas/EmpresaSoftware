@@ -1,6 +1,7 @@
 package co.edu.uniquindio.EmpresaSoftware;
 
 public class EmpresaSoftware {
+    final private String nombre="DevPlus";
     private String nit;
     private String direccion;
     private String telefono;

@@ -1,28 +1,28 @@
 package co.edu.uniquindio.EmpresaSoftware;
 
-public class Clientes {
+public class Cliente {
     private String name;
     private String id;
     private int telefono;
     private String correo;
     private String paisProcedencia;
+    private String[] serviciosAdicionales;
 
-    public Clientes(String name, String id, int telefono, String correo, String paisProcedencia) {
+    public Cliente(String name, String id, int telefono, String correo, String paisProcedencia, String[] serviciosAdicionales) {
         this.name = name;
         this.id = id;
         this.telefono = telefono;
         this.correo = correo;
         this.paisProcedencia = paisProcedencia;
+        this.serviciosAdicionales=serviciosAdicionales;
     }
 
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
+    public void setName(String id) {
         this.name = name;
     }
-
     public String getId() {
         return id;
     }
