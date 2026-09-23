@@ -1,4 +1,4 @@
-package co.edu.uniquindio;
+package co.edu.uniquindio.EmpresaSoftware;
 
 public class Main {
  static void main(){
