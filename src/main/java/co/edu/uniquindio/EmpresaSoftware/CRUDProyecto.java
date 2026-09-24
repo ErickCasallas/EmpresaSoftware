@@ -53,6 +53,10 @@ public class CRUDProyecto {
                 case 7:
                     agregarDesarrollador();
                     break;
+
+//                case 8:
+//                    mostrarDesarrolladores();
+//                    break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
                     break;
@@ -114,8 +118,9 @@ public class CRUDProyecto {
             }
         }
 
-        String estado = JOptionPane.showInputDialog("Ingrese el estado del proyecto");
-        String metodoPago = JOptionPane.showInputDialog("Ingrese el metodo de pago");
+        String estado = JOptionPane.showInputDialog("Ingrese el estado del proyecto (Pendiente - Confirmado - En curso - Finalizado - Cancelado): ");
+
+        String metodoPago = JOptionPane.showInputDialog("Ingrese el metodo de pago (Tarjeta - Efectivo - Transferencia):");
 
         Proyecto proyecto = new Proyecto(id, fechaSolicitud, fechaInicio,
                 fechaEntrega, estado, metodoPago,new Servicio[4]);
@@ -251,9 +256,9 @@ public class CRUDProyecto {
             }
         }
         listProyectos[indexProyecto].setFechaEntrega(fechaEntrega);
-        String estado = JOptionPane.showInputDialog("Ingrese el estado del proyecto actualizado");
+        String estado = JOptionPane.showInputDialog("Ingrese el estado del proyecto actualizado (Pendiente - Confirmado - En curso - Finalizado - Cancelado):");
         listProyectos[indexProyecto].setEstado(estado);
-        String metodoPago = JOptionPane.showInputDialog("Ingrese el metodo de pago actualizado");
+        String metodoPago = JOptionPane.showInputDialog("Ingrese el metodo de pago actualizado (Tarjeta - Efectivo - Transferencia):");
         listProyectos[indexProyecto].setMetodoPago(metodoPago);
     }
 
@@ -267,7 +272,7 @@ public class CRUDProyecto {
             JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado.");
         }
     }
-    public static void agregarServicioAdicional(){
+    private static void agregarServicioAdicional(){
         String id=JOptionPane.showInputDialog("Ingrese el ID del proyecto");
         for (int i = 0; i < listProyectos.length; i++) {
             if (listProyectos[i]!=null&&listProyectos[i].getId().equals(id)){
@@ -276,7 +281,7 @@ public class CRUDProyecto {
             }
         }JOptionPane.showMessageDialog(null, "ID invalido");
     }
-    public static void agregarDesarrollador(){
+    private static void agregarDesarrollador(){
         String id=JOptionPane.showInputDialog("Ingrese el ID del proyecto");
         for (int i = 0; i < listProyectos.length; i++) {
             if (listProyectos[i]!=null&&listProyectos[i].getId().equals(id)){
@@ -285,6 +290,8 @@ public class CRUDProyecto {
             }
         }JOptionPane.showMessageDialog(null, "ID invalido");
     }
+
+//    private
 }
 
 
