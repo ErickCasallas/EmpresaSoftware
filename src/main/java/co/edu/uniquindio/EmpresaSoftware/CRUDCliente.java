@@ -2,59 +2,61 @@ package co.edu.uniquindio.EmpresaSoftware;
 
 import javax.swing.*;
 
-public class MainCliente {
- static void main(){
-     Cliente[] clientes = new Cliente[100];
-     int cantidadClientes = 0;
-     int opcion;
+public class CRUDCliente {
+    static Cliente[] clientes = new Cliente[100];
+    public static void iniciar(){
 
-     do {
+        int cantidadClientes = 0;
+        int opcion;
 
-         opcion = Integer.parseInt(
-                 JOptionPane.showInputDialog(
-                         "Clientes\n\n"
-                                 + "1. Registar cliente\n"
-                                 + "2. Lista de clientes\n"
-                                 + "3. Buscar cliente\n"
-                                 + "4. Actualizar cliente\n"
-                                 + "5. Eliminar cliente\n"
-                                 + "0. Salir\n\n"
-                                 + "Seleccione una opción:"
-                 )
-         );
+        do {
 
-         switch (opcion) {
+            opcion = Integer.parseInt(
+                    JOptionPane.showInputDialog(
+                            "Clientes\n\n"
+                                    + "1. Registar cliente\n"
+                                    + "2. Lista de clientes\n"
+                                    + "3. Buscar cliente\n"
+                                    + "4. Actualizar cliente\n"
+                                    + "5. Eliminar cliente\n"
+                                    + "0. Salir del modulo\n\n"
+                                    + "Seleccione una opción:"
+                    )
+            );
 
-             case 1:
-                 cantidadClientes=registarCliente(clientes, cantidadClientes);
-                 break;
+            switch (opcion) {
 
-             case 2:
-                 listarClientes(clientes, cantidadClientes);
-                 break;
+                case 1:
+                    cantidadClientes=registarCliente(clientes, cantidadClientes);
+                    break;
 
-             case 3:
-                 buscarCliente(clientes, cantidadClientes);
-                 break;
+                case 2:
+                    listarClientes(clientes, cantidadClientes);
+                    break;
 
-             case 4:
-                 actualizarCliente(clientes, cantidadClientes);
-                 break;
+                case 3:
+                    buscarCliente(clientes, cantidadClientes);
+                    break;
 
-             case 5:
-                 cantidadClientes = eliminarCliente(clientes, cantidadClientes);
-                 break;
+                case 4:
+                    actualizarCliente(clientes, cantidadClientes);
+                    break;
 
-             case 0:
-                 JOptionPane.showMessageDialog(null, "Programa finalizado.");
-                 break;
+                case 5:
+                    cantidadClientes = eliminarCliente(clientes, cantidadClientes);
+                    break;
 
-             default:
-                 JOptionPane.showMessageDialog(null, "Opción inválida.");
-         }
+                case 0:
+                    JOptionPane.showMessageDialog(null, "Regresando al menu");
+                    break;
 
-     } while (opcion != 0);
- }
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción inválida.");
+            }
+
+        } while (opcion != 0);
+    }
+
     public static int registarCliente(Cliente[] clientes, int cantidadClientes) {
         String id = JOptionPane.showInputDialog("Ingrese el documento de identidad o NIT:");
         //Verificar que no haya un mismo cliente
@@ -149,6 +151,5 @@ public class MainCliente {
             }
         }
         JOptionPane.showMessageDialog(null,"Cliente no encontrado");
-        return cantidadClientes;
-    }
+        return cantidadClientes;}
 }

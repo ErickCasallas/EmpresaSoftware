@@ -2,9 +2,10 @@ package co.edu.uniquindio.EmpresaSoftware;
 
 import javax.swing.*;
 
-public class MainDesarrollador {
-    static void main() {
-        Desarrollador[] equipoTrabajo=new Desarrollador[100];
+public class CRUDDesarrollador {
+    static Desarrollador[] desarrolladores=new Desarrollador[100];
+   public static void iniciar(){
+
         int cantidadDesarrolladores=0;
         int option;
         do {
@@ -22,23 +23,23 @@ public class MainDesarrollador {
             );
             switch (option){
                 case 1:
-                    cantidadDesarrolladores=registrarDesarrollador(equipoTrabajo, cantidadDesarrolladores);
+                    cantidadDesarrolladores=registrarDesarrollador(desarrolladores, cantidadDesarrolladores);
                     break;
 
                 case 2:
-                    listarDesarrollador(equipoTrabajo, cantidadDesarrolladores);
+                    listarDesarrollador(desarrolladores, cantidadDesarrolladores);
                     break;
 
                 case 3:
-                    buscarDesarrollador(equipoTrabajo, cantidadDesarrolladores);
+                    buscarDesarrollador(desarrolladores, cantidadDesarrolladores);
                     break;
 
                 case 4:
-                    actualizarDesarrollador(equipoTrabajo, cantidadDesarrolladores);
+                    actualizarDesarrollador(desarrolladores, cantidadDesarrolladores);
                     break;
 
                 case 5:
-                    cantidadDesarrolladores = eliminarDesarrollador(equipoTrabajo, cantidadDesarrolladores);
+                    cantidadDesarrolladores = eliminarDesarrollador(desarrolladores, cantidadDesarrolladores);
                     break;
 
                 case 0:
@@ -50,11 +51,11 @@ public class MainDesarrollador {
             }
             }while (option!=0);
         }
-        public static int registrarDesarrollador(Desarrollador[] equipoTrabajo,int cantidadDesarrolladores) {
+        public static int registrarDesarrollador(Desarrollador[] desarrolladors,int cantidadDesarrolladores) {
             String id=JOptionPane.showInputDialog("Ingrese su codigo de ID: ");
             //Verificar que no haya un mismo cliente
             for (int i = 0; i < cantidadDesarrolladores; i++) {
-                if (equipoTrabajo[i].getId().equals(id)) {
+                if (desarrolladors[i].getId().equals(id)) {
                     JOptionPane.showMessageDialog(null,"Ya existe un desarrollador con ese documento");
                     return cantidadDesarrolladores;
                 }
@@ -64,7 +65,7 @@ public class MainDesarrollador {
             String cantidadProyectoSilmutaneo=JOptionPane.showInputDialog("Ingrese proyectos silmutaneo");
             double tarifaDia=Double.parseDouble(JOptionPane.showInputDialog("La tarifa del dia"));
             Desarrollador nuevoDesarollador= new Desarrollador(id, name, nivel, cantidadProyectoSilmutaneo,tarifaDia);
-            equipoTrabajo[cantidadDesarrolladores]=nuevoDesarollador;
+            desarrolladors[cantidadDesarrolladores]=nuevoDesarollador;
             JOptionPane.showMessageDialog(null, "Desarrollador registrado correctamente.");
             cantidadDesarrolladores++;
             return cantidadDesarrolladores;

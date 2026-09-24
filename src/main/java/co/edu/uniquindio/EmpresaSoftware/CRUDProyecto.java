@@ -3,12 +3,12 @@ package co.edu.uniquindio.EmpresaSoftware;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.time.format.DateTimeFormatter;
-public class MainProyecto {
+
+public class CRUDProyecto {
     static Proyecto[] listProyectos = new Proyecto[10];
 
 
-    static void main() {
+    public static void iniciar(){
 
         int option = 0;
         do {
