@@ -3,12 +3,12 @@ package co.edu.uniquindio.EmpresaSoftware;
 public class Cliente {
     private String name;
     private String id;
-    private int telefono;
+    private String telefono;
     private String correo;
     private String paisProcedencia;
     private String[] serviciosAdicionales;
 
-    public Cliente(String name, String id, int telefono, String correo, String paisProcedencia, String[] serviciosAdicionales) {
+    public Cliente(String name, String id, String telefono, String correo, String paisProcedencia, String[] serviciosAdicionales) {
         this.name = name;
         this.id = id;
         this.telefono = telefono;
@@ -31,11 +31,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
