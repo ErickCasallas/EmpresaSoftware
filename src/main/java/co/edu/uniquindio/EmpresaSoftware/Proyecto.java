@@ -12,6 +12,7 @@ public class Proyecto {
     private String metodoPago;
     private Servicio[] servicios= new Servicio[4];
     private Desarrollador[] desarrolladores=new Desarrollador[100];
+    int cantidadDesarrolladores;
 
     public Proyecto(String id, LocalDate fechaSolicitud, LocalDate fechaInicio, LocalDate fechaEntrega, String estado, String metodoPago, Servicio[] servicios) {
         this.id = id;
@@ -21,6 +22,13 @@ public class Proyecto {
         setEstado(estado);
         setMetodoPago(metodoPago);
         this.servicios=servicios;
+        this.cantidadDesarrolladores=0;
+    }
+    public Desarrollador[] getDesarrolladores(){
+        return this.desarrolladores;
+    }
+    public int getCantidadDesarrolladores() {
+        return cantidadDesarrolladores;
     }
     public String getId() {
         return id;
@@ -118,6 +126,7 @@ public class Proyecto {
         for (int i = 0; i < desarrolladores.length; i++) {
             if (desarrolladores[i]==null){
                 desarrolladores[i]= desarrollador;
+                cantidadDesarrolladores++;
                 return;
             }
         }

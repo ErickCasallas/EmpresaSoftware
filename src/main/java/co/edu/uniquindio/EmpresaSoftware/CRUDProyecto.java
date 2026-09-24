@@ -54,9 +54,9 @@ public class CRUDProyecto {
                     agregarDesarrollador();
                     break;
 
-//                case 8:
-//                    mostrarDesarrolladores();
-//                    break;
+                case 8:
+                    mostrarDesarrolladoresProyecto();
+                    break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
                     break;
@@ -341,6 +341,36 @@ public class CRUDProyecto {
             JOptionPane.showMessageDialog(null, "Proyecto asignado con éxito a " + cliente.getName());
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo registrar el proyecto (ID duplicado o lista llena).");
+        }
+    }
+    public static void mostrarDesarrolladoresProyecto() {
+        String idProyecto = JOptionPane.showInputDialog("Ingrese el ID del proyecto:");
+        int index = encontrarIndexProyecto(idProyecto);
+
+        if (index != -1) {
+            Proyecto proyecto = listProyectos[index];
+
+            if (proyecto.getCantidadDesarrolladores() == 0) {
+                JOptionPane.showMessageDialog(null, "El proyecto no tiene desarrolladores asignados.");
+                return;
+            }
+
+            String mensaje = "Desarrolladores asignados al proyecto " + proyecto.getId() + "\n";
+            Desarrollador[] desarrollador = proyecto.getDesarrolladores();
+            for (int i = 0; i < proyecto.getCantidadDesarrolladores(); i++) {
+                if (desarrollador[i] != null) {
+                    mensaje += (i + 1) + ". ID: " + desarrollador[i].getId()
+                            + "Nombre: " + desarrollador[i].getName()+"\n"
+                            + "Nivel: " + desarrollador[i].getNivel()+"\n"
+                            + "Equipo de trabajo " + desarrollador[i].getEquipoTrabajo()+"\n"
+                            + "Tarifa Día: $" + desarrollador[i].getTarifaDia() + "\n"
+                            + "---------------------------------------------------\n";
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, mensaje);
+        } else {
+            JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado.");
         }
     }
 
