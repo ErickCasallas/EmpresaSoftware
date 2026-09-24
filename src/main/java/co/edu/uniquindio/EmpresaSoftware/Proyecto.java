@@ -9,14 +9,16 @@ public class Proyecto {
     private LocalDate fechaEntrega;
     private String estado;
     private String metodoPago;
+    private Servicio[] servicios= new Servicio[4];
 
-    public Proyecto(String id, LocalDate fechaSolicitud, LocalDate fechaInicio, LocalDate fechaEntrega, String estado, String metodoPago) {
+    public Proyecto(String id, LocalDate fechaSolicitud, LocalDate fechaInicio, LocalDate fechaEntrega, String estado, String metodoPago, Servicio[] servicios) {
         this.id = id;
         this.fechaSolicitud = fechaSolicitud;
         this.fechaInicio = fechaInicio;
         this.fechaEntrega = fechaEntrega;
         this.estado = estado;
         this.metodoPago = metodoPago;
+        this.servicios=servicios;
     }
 
     public String getId() {
@@ -65,5 +67,24 @@ public class Proyecto {
 
     public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
+    }
+
+    public Servicio[] getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(Servicio[] servicios) {
+        this.servicios = servicios;
+    }
+
+    public void agregarServicio(Servicio servicio) {
+
+        for (int i = 0; i < servicios.length; i++) {
+
+            if (servicios[i] == null) {
+                servicios[i] = servicio;
+                return;
+            }
+        }
     }
 }

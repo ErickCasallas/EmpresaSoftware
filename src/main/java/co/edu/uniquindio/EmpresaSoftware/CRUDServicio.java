@@ -4,11 +4,8 @@ import javax.swing.*;
 
 public class CRUDServicio {
     static Servicio[] servicios=new Servicio[4];
-    static Servicio[] serviciosContratados=new Servicio[4];
-    public static void iniciar(){
-
-        int cantidadServiciosContratados=0;
-        asignarServicios(servicios);
+    public static void iniciar(Proyecto proyecto){
+        asignarServicios(servicios,proyecto);
         int option;
         do {
             option = Integer.parseInt(
@@ -23,24 +20,16 @@ public class CRUDServicio {
             );
             switch (option){
                 case 1:
-                    cantidadServiciosContratados=escogerServicioAdicional(servicios, cantidadServiciosContratados, serviciosContratados);
+                    escogerServicioAdicional(servicios, proyecto);
                     break;
 
                 case 2:
-                    listarServiciosContrados(serviciosContratados);
+                    listarServiciosContratados(proyecto);
                     break;
 
                 case 3:
+                    removerServicio(proyecto);
                     break;
-
-                case 4:
-                    //actualizarDesarrollador(equipoTrabajo, cantidadDesarrolladores);
-                    break;
-
-                case 5:
-                    //cantidadDesarrolladores = eliminarDesarrollador(equipoTrabajo, cantidadDesarrolladores);
-                    break;
-
                 case 0:
                     JOptionPane.showMessageDialog(null, "Programa finalizado.");
                     break;
@@ -50,46 +39,75 @@ public class CRUDServicio {
            }
         }while (option!=0);
     }
-    public static void asignarServicios(Servicio[]servicios){
-        Servicio soporteTenico= new Servicio(null,
+    public static void listarServiciosContratados(Proyecto proyecto) {
+        String mensaje = "Servicios contratados por el proyecto " + proyecto.getId() + ":\n\n";
+
+        Servicio[] serviciosContratados = proyecto.getServicios();
+
+        boolean tieneServicios = false;
+
+        for (int i = 0; i < serviciosContratados.length; i++) {
+            if (serviciosContratados[i] != null) {
+                tieneServicios = true;
+
+                mensaje += "ID: " + serviciosContratados[i].getId() + "\n"
+                        + "Nombre: " + serviciosContratados[i].getName() + "\n"
+                        + "Descripcion: " + serviciosContratados[i].getDescripcion() + "\n"
+                        + "Precio: " + serviciosContratados[i].getPrecio() + "\n"
+                        + "------------------------\n";
+            }
+        }
+
+        if (!tieneServicios) {
+            mensaje += "El proyecto no tiene servicios contratados.";
+        }
+
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+    public static void asignarServicios(Servicio[]servicios, Proyecto proyecto){
+        Servicio soporteTenico= new Servicio(proyecto.getId(),
                 "Soporte tenico",
                 "Es una asistencia especializada diseñada para resolver problemas, configurar equipos y mantener en óptimas condiciones",
                 200000,
-                false);
-        Servicio capacitacionUsuario= new Servicio(null,
+                true);
+        Servicio capacitacionUsuario= new Servicio(proyecto.getId(),
                 "Capacitación de usuarios",
                 " Es un servicio diseñado para enseñar a las personas a utilizar de manera correcta, eficiente y segura las herramientas tecnológicas",
                 300000,
-                false);
-        Servicio  despliegueNube= new Servicio(null,
+                true);
+        Servicio  despliegueNube= new Servicio(proyecto.getId(),
                 "Despliegue en la nube",
                 "Es el proceso de configurar, cargar y poner en funcionamiento aplicaciones, sitios web o bases de datos en servidores de internet",
                 250000,
-                false);
-        Servicio  migracionDatos= new Servicio(null,
+                true);
+        Servicio  migracionDatos= new Servicio(proyecto.getId(),
                 "Migración de datos",
                 "Proceso de transferir información de manera segura y organizada desde un sistema, formato o servidor de almacenamiento hacia otro nuevo, asegurando que no se pierda nada en el camino.",
                 250000,
-                false);
+                true);
         servicios[0]=soporteTenico;
         servicios[1]=capacitacionUsuario;
         servicios[2]=despliegueNube;
         servicios[3]=migracionDatos;
     }
-    public static void listarServiciosContrados(Servicio[] serviciosContratados){
+    public static void listarServicios(Servicio[] servicios) {
 
         String mensaje = "";
-        for (Servicio serviciosContratado : serviciosContratados) {
-            if (serviciosContratado != null) {
-                mensaje += "Documento: " + serviciosContratado.getId() + "\n"
-                        + "Nombre: " + serviciosContratado.getName() + "\n"
-                        + "Descripcion: " + serviciosContratado.getDescripcion() + "\n"
-                        + "Precio: " + serviciosContratado.getPrecio() + "\n"
-                        + "Disponibilidad: " + serviciosContratado.getDisponibilidad() + "\n"
+
+        for (int i = 0; i < servicios.length; i++) {
+
+            if (servicios[i] != null) {
+
+                mensaje += "ID: " + servicios[i].getId() + "\n"
+                        + "Nombre: " + servicios[i].getName() + "\n"
+                        + "Descripcion: " + servicios[i].getDescripcion() + "\n"
+                        + "Precio: " + servicios[i].getPrecio() + "\n"
+                        + "Disponibilidad: " + servicios[i].getDisponibilidad() + "\n"
                         + "------------------------\n";
             }
         }
-            JOptionPane.showMessageDialog(null,mensaje);
+
+        JOptionPane.showMessageDialog(null, mensaje);
     }
     public static int listarServicio(Servicio[] servicios,int index){
         String mensaje = "";
@@ -118,90 +136,121 @@ public class CRUDServicio {
             }
         return seleccion;
     }
-    //Prueba de paneles personalizados de Santiago Paez y Erik Casallas
-    public static int escogerServicioAdicional(Servicio[] servicios,int cantidadServiciosContratados,Servicio[] serviciosContratados){
-        String[] nombreBotones=new String[4];
+    //Prueba de paneles personalizados de Santiago Paez y Erik Casallas 1.0
+    //Simplicacion de codio 2.0
+    public static void escogerServicioAdicional(Servicio[] servicios, Proyecto proyecto){
+
+        String[] nombreBotones = new String[4];
+
         for (int i = 0; i < servicios.length; i++) {
-            nombreBotones[i]=servicios[i].getName();
+            nombreBotones[i] = servicios[i].getName();
         }
+
         int seleccion;
         int respuesta;
         int a;
-        do{
-            seleccion = JOptionPane.showOptionDialog(null, "¿Que servicio adicional desea escoger", "Servicios", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, nombreBotones, nombreBotones[0]);
-            switch (seleccion) {
-                case 0:
-                    a = listarServicio(servicios, seleccion);
-                    if (a == 1) {
-                        for (int i = 0; i < serviciosContratados.length; i++) {
-                            if (serviciosContratados[i] == null) {
-                                serviciosContratados[i] = servicios[seleccion];
-                                break;
-                            }
-                        }
-                        respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro servicio adicional?",
-                                "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION);
-                        if (respuesta == JOptionPane.YES_OPTION) {
 
-                            break;
-                        } else if (respuesta == JOptionPane.NO_OPTION) {
-                            seleccion = 4;
-                        }
-                    }
-                    if (a == 0) {
-                        seleccion = 4;
-                    }
-                    break;
+        do {
 
-                case 1:
-                    a = listarServicio(servicios, seleccion);
-                    if (a == 1) {
-                        for (int i = 0; i < serviciosContratados.length; i++) {
-                            if (serviciosContratados[i] == null) {
-                                serviciosContratados[i] = servicios[seleccion];
-                                break;
-                            }
-                        }
-                        respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro servicio adicional?",
-                                "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION);
-                        if (respuesta == JOptionPane.YES_OPTION) {
-                            break;
-                        } else if (respuesta == JOptionPane.NO_OPTION) {
-                            seleccion = 4;
-                        }
-                    }
-                    if (a == 0) {
-                        seleccion = 4;
-                    }
+            seleccion = JOptionPane.showOptionDialog(
+                    null,
+                    "¿Que servicio adicional desea escoger",
+                    "Servicios",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    nombreBotones,
+                    nombreBotones[0]
+            );
 
-                    break;
-                case 3:
-                    a = listarServicio(servicios, seleccion);
-                    if (a == 1) {
-                        for (int i = 0; i < serviciosContratados.length; i++) {
-                            if (serviciosContratados[i] == null) {
-                                serviciosContratados[i] = servicios[seleccion];
-                                break;
-                            }
-                        }
-                        respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro servicio adicional?",
-                                "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION);
-                        if (respuesta == JOptionPane.YES_OPTION) {
-                            break;
-                        } else if (respuesta == JOptionPane.NO_OPTION) {
-                            seleccion = 4;
-                        }
-                    }
-                    if (a == 0) {
-                        seleccion = 4;
-                    }
+            if (seleccion == -1) {
+                seleccion = 4;
+                continue;
             }
-        }while (seleccion!=4);
-        for (Servicio serviciosContratado : serviciosContratados) {
-            if (serviciosContratado != null) {
-                cantidadServiciosContratados++;
+
+            a = listarServicio(servicios, seleccion);
+
+            if (a == 1) {
+
+                proyecto.agregarServicio(servicios[seleccion]);
+
+                respuesta = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Desea agregar otro servicio adicional?",
+                        "Confirmación",
+                        JOptionPane.YES_NO_CANCEL_OPTION
+                );
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+
+                    // vuelve a mostrar los servicios
+
+                } else {
+
+                    seleccion = 4;
+                }
+
+            } else if (a == 0) {
+
+                seleccion = 4;
+            }
+
+        } while (seleccion != 4);
+    }
+    public static void removerServicio(Proyecto proyecto){
+        Servicio[] serviciosContratados= proyecto.getServicios();
+        int cantidadServicios=0;
+        for (int i = 0; i < serviciosContratados.length; i++) {
+            if (serviciosContratados[i] != null) {
+                cantidadServicios++;
             }
         }
-        return cantidadServiciosContratados;
+        if (cantidadServicios==0){
+            JOptionPane.showMessageDialog(null, "El proyecto no tiene servicios contratados");
+            return;
+        }
+        String[] nombreBotones = new String[cantidadServicios];
+        int contador=0;
+        for (int i = 0; i < serviciosContratados.length; i++) {
+            if (serviciosContratados[i]!=null) {
+                nombreBotones[contador] = serviciosContratados[i].getName();
+                contador++;
+            }
+        }
+        int seleccion=JOptionPane.showOptionDialog(null, "¿Que servicio adicional desea remover?", "Remover servicio", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, nombreBotones,nombreBotones[0]);
+        if (seleccion==-1){
+            return;
+        }
+        int posicion=-1;
+        contador=0;
+        for (int i = 0; i < serviciosContratados.length; i++) {
+
+            if (serviciosContratados[i] != null) {
+
+                if (contador == seleccion){
+                    posicion = i;
+                    break;
+                }
+                contador++;
+            }
+        }
+        if (posicion!=-1) {
+            int respuesta = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Desea remover el servicio "
+                            + serviciosContratados[posicion].getName()
+                            + "?",
+                    "Confirmar",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+
+                serviciosContratados[posicion] = null;
+
+                JOptionPane.showMessageDialog(null,
+                        "Servicio removido correctamente.");
+            }
+        }
     }
 }

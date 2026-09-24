@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class CRUDProyecto {
+    static CRUDServicio moduloServicio=new CRUDServicio();
     static Proyecto[] listProyectos = new Proyecto[10];
 
 
@@ -20,6 +21,7 @@ public class CRUDProyecto {
                             + "\n 3. Buscar proyecto:"
                             + "\n 4. Actualizar proyecto: "
                             + "\n 5. Cancelar Proyecto:"
+                            + "\n 6. Agregar servicios adicionales"
                             + "\n 0. Salir del sistema:"));
 
             switch (option) {
@@ -42,6 +44,9 @@ public class CRUDProyecto {
 
                 case 5:
                     eliminarProyecto();
+                    break;
+                case 6:
+                    agregarServicioAdicional();
                     break;
 
                 case 0:
@@ -109,7 +114,7 @@ public class CRUDProyecto {
         String metodoPago = JOptionPane.showInputDialog("Ingrese el metodo de pago");
 
         Proyecto proyecto = new Proyecto(id, fechaSolicitud, fechaInicio,
-                fechaEntrega, estado, metodoPago);
+                fechaEntrega, estado, metodoPago,new Servicio[4]);
 
         boolean resultado = registrarProyecto(proyecto.getId(), proyecto);
 
@@ -171,6 +176,7 @@ public class CRUDProyecto {
     }
 
     private static void mostrarListaProyectos() {
+
         String mensaje = "Lista de proyectos:\n";
         for (int i = 0; i < listProyectos.length; i++) {
             if (listProyectos[i] != null) {
@@ -256,6 +262,15 @@ public class CRUDProyecto {
         } else {
             JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado.");
         }
+    }
+    public static void agregarServicioAdicional(){
+        String id=JOptionPane.showInputDialog("Ingrese el ID del proyecto");
+        for (int i = 0; i < listProyectos.length; i++) {
+            if (listProyectos[i]!=null&&listProyectos[i].getId().equals(id)){
+                moduloServicio.iniciar(listProyectos[i]);
+                return;
+            }
+        }JOptionPane.showMessageDialog(null, "ID invalido");
     }
 
 }
