@@ -6,15 +6,12 @@ public class Servicio {
     private String descripcion;
     private String precio;
     private String disponibilidad;
-    private String tipoServicio;
-
-    public Servicio(String id, String name, String descripcion, String precio, String disponibilidad, String tipoServicio) {
+    public Servicio(String id, String name, String descripcion, String precio, String disponibilidad) {
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
         this.precio = precio;
         this.disponibilidad = disponibilidad;
-        this.tipoServicio = tipoServicio;
     }
 
     public String getId() {
@@ -55,13 +52,5 @@ public class Servicio {
 
     public void setDisponibilidad(String disponibilidad) {
         this.disponibilidad = disponibilidad;
-    }
-
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
     }
 }

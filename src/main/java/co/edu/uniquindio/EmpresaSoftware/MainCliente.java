@@ -72,7 +72,7 @@ public class MainCliente {
         String correo = JOptionPane.showInputDialog("Ingrese el correo electrónico:");
         String pais = JOptionPane.showInputDialog("Ingrese el país de procedencia:");
         String[] serviciosAdicionales = new String[4];
-        Cliente nuevoCliente = new Cliente(nombre, id, telefono, correo, pais, serviciosAdicionales);
+        Cliente nuevoCliente = new Cliente(nombre, id, telefono, correo, pais);
 
         clientes[cantidadClientes] = nuevoCliente;
 
@@ -127,6 +127,7 @@ public class MainCliente {
                 String telefono=JOptionPane.showInputDialog("Ingrese el telefono:", clientes[i].getTelefono());
                 String correo=JOptionPane.showInputDialog("Ingrese el correo electronico:",clientes[i].getCorreo());
                 String paisOrigen=JOptionPane.showInputDialog("Ingrese el pais de procedencia:",clientes[i].getPaisProcedencia());
+                clientes[i].setId(id);
                 clientes[i].setName(nombre);
                 clientes[i].setTelefono(telefono);
                 clientes[i].setCorreo(correo);
