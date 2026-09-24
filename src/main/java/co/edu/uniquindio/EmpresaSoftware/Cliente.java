@@ -6,15 +6,13 @@ public class Cliente {
     private String telefono;
     private String correo;
     private String paisProcedencia;
-    private String[] serviciosAdicionales;
 
-    public Cliente(String name, String id, String telefono, String correo, String paisProcedencia, String[] serviciosAdicionales) {
+    public Cliente(String name, String id, String telefono, String correo, String paisProcedencia) {
         this.name = name;
         this.id = id;
         this.telefono = telefono;
         this.correo = correo;
         this.paisProcedencia = paisProcedencia;
-        this.serviciosAdicionales=serviciosAdicionales;
     }
 
     public String getName() {
