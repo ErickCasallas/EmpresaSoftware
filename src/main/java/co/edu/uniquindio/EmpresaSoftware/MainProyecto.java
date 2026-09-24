@@ -3,6 +3,7 @@ package co.edu.uniquindio.EmpresaSoftware;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 public class MainProyecto {
     static Proyecto[] listProyectos = new Proyecto[10];
 
@@ -16,7 +17,7 @@ public class MainProyecto {
                             + "\n Seleccione una opcion:"
                             + "\n 1. Registrar proyecto:"
                             + "\n 2. Mostrar proyectos:"
-                            + "\n 3. Mostrar proyecto por id:"
+                            + "\n 3. Buscar proyecto:"
                             + "\n 4. Actualizar proyecto: "
                             + "\n 5. Cancelar Proyecto:"
                             + "\n 0. Salir del sistema:"));
@@ -35,13 +36,13 @@ public class MainProyecto {
                     solicitarIdProyecto();
                     break;
 
-//                case 4:
-//                    actualizarProyecto();
-//                    break;
-//
-//                case 5:
-//                    eliminarMascota();
-//                    break;
+               case 4:
+                   actualizarProyecto();
+                    break;
+
+                case 5:
+                    eliminarProyecto();
+                    break;
 
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
@@ -58,6 +59,7 @@ public class MainProyecto {
     public static void solicitarProyecto() {
         String id = JOptionPane.showInputDialog("Ingrese el id del proyecto:");
 
+
         LocalDate fechaSolicitud = null;
         while (fechaSolicitud == null) {
             try {
@@ -65,10 +67,11 @@ public class MainProyecto {
                 if (input == null) {
                     return;
                 }
+                fechaSolicitud = LocalDate.parse(input);
             }
             catch(DateTimeParseException e){
-                    JOptionPane.showMessageDialog(null, "Formato erroneo");
-                }
+                JOptionPane.showMessageDialog(null, "Formato erroneo");
+            }
 
         }
 
@@ -80,6 +83,7 @@ public class MainProyecto {
                 if (input == null) {
                     return;
                 }
+                fechaInicio = LocalDate.parse(input);
             }
             catch(DateTimeParseException e){
                 JOptionPane.showMessageDialog(null, "Formato erroneo");
@@ -94,11 +98,11 @@ public class MainProyecto {
                 if (input == null) {
                     return;
                 }
+                fechaEntrega = LocalDate.parse(input);
             }
             catch(DateTimeParseException e){
                 JOptionPane.showMessageDialog(null, "Formato erroneo");
             }
-
         }
 
         String estado = JOptionPane.showInputDialog("Ingrese el estado del proyecto");
@@ -174,12 +178,86 @@ public class MainProyecto {
                         + "\nFecha de inicio: " + listProyectos[i].getFechaInicio()
                         + "\nFecha de entrega: " + listProyectos[i].getFechaEntrega()
                         + "\nEstado del proyecto: " + listProyectos[i].getEstado()
-                        + "\nMetodo de pago: " + listProyectos[i].getMetodoPago();
-            }
+                        + "\nMetodo de pago: " + listProyectos[i].getMetodoPago()
+                        + "\n---------------------------\n";
 
+            }
         }
         JOptionPane.showMessageDialog(null, mensaje);
     }
+
+    private static void actualizarProyecto(){
+        String idProyectoActualizar = JOptionPane.showInputDialog("Ingrese el id del proyecto que deseaActualizar");
+        int index = encontrarIndexProyecto(idProyectoActualizar);
+
+        if (index != -1){
+            actualizarDatosProyecto(index);
+        } else {
+            JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado: " );
+        }
+    }
+
+    private static void actualizarDatosProyecto(int indexProyecto) {
+
+        LocalDate fechaSolicitud = null;
+        while (fechaSolicitud == null) {
+            try {
+                String input = JOptionPane.showInputDialog("Ingrese la fecha actualizada de la solicitud (AAAA-MM-DD):");
+                if (input == null) {
+                    return;
+                }
+                fechaSolicitud = LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato erroneo");
+            }
+
+        }
+        listProyectos[indexProyecto].setFechaSolicitud(fechaSolicitud);
+
+        LocalDate fechaInicio = null;
+        while (fechaInicio == null) {
+            try {
+                String input = JOptionPane.showInputDialog("Ingrese la fecha actualizada de inicio (AAAA-MM-DD):");
+                if (input == null) {
+                    return;
+                }
+                fechaInicio = LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato erroneo");
+            }
+        }
+        listProyectos[indexProyecto].setFechaInicio(fechaInicio);
+
+        LocalDate fechaEntrega = null;
+        while (fechaEntrega == null) {
+            try {
+                String input = JOptionPane.showInputDialog("Ingrese la fecha actualizada de entrega (AAAA-MM-DD):");
+                if (input == null) {
+                    return;
+                }
+                fechaEntrega = LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato erroneo");
+            }
+        }
+        listProyectos[indexProyecto].setFechaEntrega(fechaEntrega);
+        String estado = JOptionPane.showInputDialog("Ingrese el estado del proyecto actualizado");
+        listProyectos[indexProyecto].setEstado(estado);
+        String metodoPago = JOptionPane.showInputDialog("Ingrese el metodo de pago actualizado");
+        listProyectos[indexProyecto].setMetodoPago(metodoPago);
+    }
+
+    private static void eliminarProyecto(){
+        String idProyectoBorrar = JOptionPane.showInputDialog("Ingrese el id del proyecto que desea eliminar:");
+        int index = encontrarIndexProyecto(idProyectoBorrar);
+
+        if (index != -1){
+            listProyectos[index] = null;
+        } else {
+            JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado.");
+        }
+    }
+
 }
 
 
