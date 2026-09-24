@@ -135,7 +135,7 @@ public class CRUDServicio {
             }
         return seleccion;
     }
-    //Prueba de paneles personalizados de Santiago Paez y Erik Casallas 1.0
+    //Prueba de paneles personalizados de Santiago Paez y Erick Casallas 1.0
     //Simplicacion de codio 2.0
     private static void escogerServicioAdicional(Servicio[] servicios, Proyecto proyecto){
 

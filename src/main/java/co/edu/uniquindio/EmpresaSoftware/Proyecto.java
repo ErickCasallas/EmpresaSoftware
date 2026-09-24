@@ -1,5 +1,6 @@
 package co.edu.uniquindio.EmpresaSoftware;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 public class Proyecto {
@@ -17,8 +18,8 @@ public class Proyecto {
         this.fechaSolicitud = fechaSolicitud;
         this.fechaInicio = fechaInicio;
         this.fechaEntrega = fechaEntrega;
-        this.estado = estado;
-        this.metodoPago = metodoPago;
+        setEstado(estado);
+        setMetodoPago(metodoPago);
         this.servicios=servicios;
     }
     public String getId() {
@@ -49,12 +50,56 @@ public class Proyecto {
         return estado;
     }
     public void setEstado(String estado) {
+        boolean valido;
+        do {
+            switch (estado.toLowerCase()) {
+                case "pendiente":
+                    valido = false;
+                    break;
+                case "confirmado":
+                    valido = false;
+                    break;
+                case "en curso":
+                    valido = false;
+                    break;
+                case "entregado":
+                    valido = false;
+                    break;
+                case "cancelado":
+                    valido = false;
+                    break;
+                default:
+                    valido = true;
+                    JOptionPane.showMessageDialog(null,"Estado del proyecto invalido");
+                    estado = JOptionPane.showInputDialog("Ingrese nuevamente el estado del proyecto (Pendiente - Confirmado - En curso - Finalizado - Cancelado): ");
+                    break;
+            }
+        } while (valido);
         this.estado = estado;
     }
     public String getMetodoPago() {
         return metodoPago;
     }
     public void setMetodoPago(String metodoPago) {
+        boolean valido;
+        do {
+            switch (metodoPago.toLowerCase()) {
+                case "tarjeta":
+                    valido = false;
+                    break;
+                case "efectivo":
+                    valido = false;
+                    break;
+                case "transferencia":
+                    valido = false;
+                    break;
+                default:
+                    valido = true;
+                    JOptionPane.showMessageDialog(null,"Metodo de pago invalido");
+                    metodoPago = JOptionPane.showInputDialog("Ingrese nuevamente el metodo de pago (Tarjeta - Efectivo - Transferencia): ");
+                    break;
+            }
+        } while (valido);
         this.metodoPago = metodoPago;
     }
     public Servicio[] getServicios() {

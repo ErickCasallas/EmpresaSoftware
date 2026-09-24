@@ -5,6 +5,7 @@ import javax.swing.*;
 public class MainPrincipal {
     static void main() {
         CRUDCliente moduloClientes=new CRUDCliente();
+
         CRUDProyecto moduloProyecto=new CRUDProyecto();
         CRUDDesarrollador moduloDesarrollador=new CRUDDesarrollador();
         int option;

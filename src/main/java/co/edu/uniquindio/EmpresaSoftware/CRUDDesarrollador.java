@@ -64,10 +64,11 @@ public class CRUDDesarrollador {
                 }
             }
             String name=JOptionPane.showInputDialog("Ingrese su nombre: ");
-            String nivel=JOptionPane.showInputDialog("Ingrese el nivel");
+            String nivel=JOptionPane.showInputDialog("Ingrese el nivel (Junior - Semisenior - Senior): ");
             String cantidadProyectoSilmutaneo=JOptionPane.showInputDialog("Ingrese proyectos silmutaneo");
+            String equipoTrabajo=JOptionPane.showInputDialog("Ingrese el equipo de trabajo (Fronted - Backend - Mobile Devs - DevOps - QA): ");
             double tarifaDia=Double.parseDouble(JOptionPane.showInputDialog("La tarifa del dia"));
-            Desarrollador nuevoDesarollador= new Desarrollador(id, name, nivel, cantidadProyectoSilmutaneo,tarifaDia);
+            Desarrollador nuevoDesarollador= new Desarrollador(id, name, nivel, cantidadProyectoSilmutaneo,equipoTrabajo, tarifaDia);
             desarrolladors[cantidadDesarrolladores]=nuevoDesarollador;
             JOptionPane.showMessageDialog(null, "Desarrollador registrado correctamente.");
             cantidadDesarrolladores++;
@@ -88,6 +89,7 @@ public class CRUDDesarrollador {
                         +"Nombre: " + desarrolladores[i].getName() + "\n"
                         +"Nivel: " + desarrolladores[i].getNivel() + "\n"
                         +"Cantidad de Proyectos Silmutaneos: " + desarrolladores[i].getCantidadProyectoSilmutaneo() + "\n"
+                        + "Equipo de trabajo: " + desarrolladores[i].getEquipoTrabajo() + "\n"
                         +"Taria del dia: " + desarrolladores[i].getTarifaDia() + "\n"
                         +"------------------------\n";
             }
@@ -102,6 +104,7 @@ public class CRUDDesarrollador {
                         + "Nombre/Razón social: " + desarrolladores[i].getName() + "\n"
                         + "Nivel: " + desarrolladores[i].getNivel() + "\n"
                         + "Cantidad de Proyectos Silmutaneos: " + desarrolladores[i].getCantidadProyectoSilmutaneo() + "\n"
+                        + "Equipo de trabajo: " + desarrolladores[i].getEquipoTrabajo() + "\n"
                         + "Taria del Dia: " + desarrolladores[i].getTarifaDia();
                 JOptionPane.showMessageDialog(null, mensaje);
                 return;
@@ -117,10 +120,12 @@ public class CRUDDesarrollador {
                 String id=JOptionPane.showInputDialog("Ingrese el documento del desarrollador", desarrolladores[i].getId());
                 String nivel=JOptionPane.showInputDialog("Ingrese el nivel:", desarrolladores[i].getNivel());
                 String cantidadProyectoSilmutaneo=JOptionPane.showInputDialog("Ingrese la cantidad de Proyectos Silmutaneos:",desarrolladores[i].getCantidadProyectoSilmutaneo());
+                String equipoDeTrabajo=JOptionPane.showInputDialog("Ingrese el equipo de trabajo: ", desarrolladores[i].getEquipoTrabajo());
                 double tarifaDia=Double.parseDouble(JOptionPane.showInputDialog("Ingrese el pais de procedencia:",desarrolladores[i].getTarifaDia()));
                 desarrolladores[i].setName(nombre);
                 desarrolladores[i].setNivel(nivel);
                 desarrolladores[i].setCantidadProyectoSilmutaneo(cantidadProyectoSilmutaneo);
+                desarrolladores[i].setEquipoTrabajo(equipoDeTrabajo);
                 desarrolladores[i].setTarifaDia(tarifaDia);
                 desarrolladores[i].setId(id);
                 JOptionPane.showMessageDialog(null,"Registro actualizado");

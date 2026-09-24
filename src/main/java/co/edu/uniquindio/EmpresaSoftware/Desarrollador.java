@@ -8,13 +8,16 @@ public class Desarrollador{
     private String name;
     private String nivel;
     private String cantidadProyectoSilmutaneo;
+    private String equipoTrabajo;
     private double tarifaDia;
 
-    public Desarrollador(String id,String name, String nivel, String cantidadProyectoSilmutaneo, double tarifaDia) {
+
+    public Desarrollador(String id,String name, String nivel, String cantidadProyectoSilmutaneo, String equipoTrabajo, double tarifaDia) {
         this.name=name;
         setId(id);
         setNivel(nivel);
         this.cantidadProyectoSilmutaneo = cantidadProyectoSilmutaneo;
+        setEquipoTrabajo(equipoTrabajo);
         this.tarifaDia = tarifaDia;
     }
 
@@ -81,4 +84,39 @@ public class Desarrollador{
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getEquipoTrabajo() {
+        return equipoTrabajo;
+    }
+
+    public void setEquipoTrabajo(String equipoTrabajo) {
+        boolean valido;
+        do {
+            switch (equipoTrabajo.toLowerCase()) {
+                case "fronted":
+                    valido = false;
+                    break;
+                case "backend":
+                    valido = false;
+                    break;
+                case "movile Devs":
+                    valido = false;
+                    break;
+                case "devops":
+                    valido = false;
+                    break;
+                case "qa":
+                    valido = false;
+                    break;
+                default:
+                    valido = true;
+                    JOptionPane.showMessageDialog(null,"Equipo de trabajo invalido");
+                    equipoTrabajo = JOptionPane.showInputDialog("Ingrese nuevamente el equipo de trabajo (Fronted - Backend - Mobile Devs - DevOps - QA):");
+                    break;
+            }
+        } while (valido);
+        this.equipoTrabajo = equipoTrabajo;
+    }
+
+
 }
