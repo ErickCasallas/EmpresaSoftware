@@ -14,7 +14,7 @@ public class MainPrincipal {
                     JOptionPane.showInputDialog(
                             "Menu Principal\n\n"
                                     + "1. Modulo Clientes\n"
-                                    + "2. Modulo Proyecto\n"
+                                    + "2. Modulo Proyectos\n"
                                     + "3. Modulo Desarrolladores\n"
                                     + "0. Salir\n\n"
                                     + "Seleccione una opción:"
@@ -29,7 +29,7 @@ public class MainPrincipal {
                     break;
                 case 3:
                     moduloDesarrollador.iniciarDesarrollador();
-                    break;
+                break;
                 case 0: JOptionPane.showMessageDialog(null, "Programa finalizado.");
                     break;
             }

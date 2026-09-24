@@ -3,13 +3,12 @@ package co.edu.uniquindio.EmpresaSoftware;
 import javax.swing.*;
 import java.util.Locale;
 
-public class Desarrollador {
+public class Desarrollador{
     private String id;
     private String name;
     private String nivel;
     private String cantidadProyectoSilmutaneo;
     private double tarifaDia;
-    private Proyecto[] proyectos= new Proyecto[100];
 
     public Desarrollador(String id,String name, String nivel, String cantidadProyectoSilmutaneo, double tarifaDia) {
         this.name=name;

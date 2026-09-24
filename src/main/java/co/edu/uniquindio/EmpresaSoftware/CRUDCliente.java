@@ -3,6 +3,7 @@ package co.edu.uniquindio.EmpresaSoftware;
 import javax.swing.*;
 
 public class CRUDCliente {
+    static CRUDProyecto moduloProyecto=new CRUDProyecto();
     static Cliente[] clientes = new Cliente[100];
     public static void iniciar(){
 
@@ -19,6 +20,7 @@ public class CRUDCliente {
                                     + "3. Buscar cliente\n"
                                     + "4. Actualizar cliente\n"
                                     + "5. Eliminar cliente\n"
+                                    + "6. Contratar Proyecto\n"
                                     + "0. Salir del modulo\n\n"
                                     + "Seleccione una opción:"
                     )
@@ -45,7 +47,9 @@ public class CRUDCliente {
                 case 5:
                     cantidadClientes = eliminarCliente(clientes, cantidadClientes);
                     break;
-
+                case 6:
+                    contratarProyectoACliente(clientes, cantidadClientes);
+                    break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Regresando al menu");
                     break;
@@ -73,7 +77,6 @@ public class CRUDCliente {
         String telefono = JOptionPane.showInputDialog("Ingrese el teléfono:");
         String correo = JOptionPane.showInputDialog("Ingrese el correo electrónico:");
         String pais = JOptionPane.showInputDialog("Ingrese el país de procedencia:");
-        String[] serviciosAdicionales = new String[4];
         Cliente nuevoCliente = new Cliente(nombre, id, telefono, correo, pais);
 
         clientes[cantidadClientes] = nuevoCliente;
@@ -83,7 +86,7 @@ public class CRUDCliente {
 
         return cantidadClientes;
     }
-    protected static void listarClientes(Cliente[] clientes, int cantidadClientes) {
+    private static void listarClientes(Cliente[] clientes, int cantidadClientes) {
 
         if (cantidadClientes == 0) {
             JOptionPane.showMessageDialog(null, "No hay clientes registrados.");
@@ -113,7 +116,8 @@ public class CRUDCliente {
                         + "Documento/NIT: " + clientes[i].getId() + "\n"
                         + "Teléfono: " + clientes[i].getTelefono() + "\n"
                         + "Correo: " + clientes[i].getCorreo() + "\n"
-                        + "País: " + clientes[i].getPaisProcedencia();
+                        + "País: " + clientes[i].getPaisProcedencia()+"\n"
+                        + "Proyectos contratados: " + clientes[i].getCantidadProyectos() + "\n";
                 JOptionPane.showMessageDialog(null, mensaje);
                 return;
             }
@@ -152,4 +156,27 @@ public class CRUDCliente {
         }
         JOptionPane.showMessageDialog(null,"Cliente no encontrado");
         return cantidadClientes;}
+    public static void contratarProyectoACliente(Cliente[] clientes, int cantidadClientes) {
+        if (cantidadClientes == 0) {
+            JOptionPane.showMessageDialog(null, "No hay clientes registrados.");
+            return;
+        }
+
+        String documento = JOptionPane.showInputDialog("Ingrese el documento/NIT del cliente:");
+        Cliente clienteEncontrado = null;
+
+        for (int i = 0; i < cantidadClientes; i++) {
+            if (clientes[i] != null && clientes[i].getId().equals(documento)) {
+                clienteEncontrado = clientes[i];
+                break;
+            }
+        }
+
+        if (clienteEncontrado != null) {
+            // Solicitamos el proyecto pasando el cliente encontrado
+            moduloProyecto.solicitarProyectoParaCliente(clienteEncontrado);
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
+        }
+    }
 }

@@ -39,7 +39,7 @@ public class CRUDServicio {
            }
         }while (option!=0);
     }
-    public static void listarServiciosContratados(Proyecto proyecto) {
+    private static void listarServiciosContratados(Proyecto proyecto) {
         String mensaje = "Servicios contratados por el proyecto " + proyecto.getId() + ":\n\n";
 
         Servicio[] serviciosContratados = proyecto.getServicios();
@@ -49,7 +49,6 @@ public class CRUDServicio {
         for (int i = 0; i < serviciosContratados.length; i++) {
             if (serviciosContratados[i] != null) {
                 tieneServicios = true;
-
                 mensaje += "ID: " + serviciosContratados[i].getId() + "\n"
                         + "Nombre: " + serviciosContratados[i].getName() + "\n"
                         + "Descripcion: " + serviciosContratados[i].getDescripcion() + "\n"
@@ -64,7 +63,7 @@ public class CRUDServicio {
 
         JOptionPane.showMessageDialog(null, mensaje);
     }
-    public static void asignarServicios(Servicio[]servicios, Proyecto proyecto){
+    private static void asignarServicios(Servicio[]servicios, Proyecto proyecto){
         Servicio soporteTenico= new Servicio(proyecto.getId(),
                 "Soporte tenico",
                 "Es una asistencia especializada diseñada para resolver problemas, configurar equipos y mantener en óptimas condiciones",
@@ -90,7 +89,7 @@ public class CRUDServicio {
         servicios[2]=despliegueNube;
         servicios[3]=migracionDatos;
     }
-    public static void listarServicios(Servicio[] servicios) {
+    private static void listarServicios(Servicio[] servicios) {
 
         String mensaje = "";
 
@@ -109,7 +108,7 @@ public class CRUDServicio {
 
         JOptionPane.showMessageDialog(null, mensaje);
     }
-    public static int listarServicio(Servicio[] servicios,int index){
+    private static int listarServicio(Servicio[] servicios,int index){
         String mensaje = "";
             if (servicios[index]!=null&&servicios[index].getDisponibilidad()){
                 mensaje += "ID: " + servicios[index].getId() + "\n"
@@ -138,7 +137,7 @@ public class CRUDServicio {
     }
     //Prueba de paneles personalizados de Santiago Paez y Erik Casallas 1.0
     //Simplicacion de codio 2.0
-    public static void escogerServicioAdicional(Servicio[] servicios, Proyecto proyecto){
+    private static void escogerServicioAdicional(Servicio[] servicios, Proyecto proyecto){
 
         String[] nombreBotones = new String[4];
 
@@ -197,7 +196,7 @@ public class CRUDServicio {
 
         } while (seleccion != 4);
     }
-    public static void removerServicio(Proyecto proyecto){
+    private static void removerServicio(Proyecto proyecto){
         Servicio[] serviciosContratados= proyecto.getServicios();
         int cantidadServicios=0;
         for (int i = 0; i < serviciosContratados.length; i++) {

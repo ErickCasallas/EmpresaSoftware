@@ -54,7 +54,7 @@ public class CRUDDesarrollador {
             }
             }while (option!=0);
         }
-        public static int registrarDesarrollador(Desarrollador[] desarrolladors,int cantidadDesarrolladores) {
+        private static int registrarDesarrollador(Desarrollador[] desarrolladors,int cantidadDesarrolladores) {
             String id=JOptionPane.showInputDialog("Ingrese su codigo de ID: ");
             //Verificar que no haya un mismo cliente
             for (int i = 0; i < cantidadDesarrolladores; i++) {
@@ -73,7 +73,7 @@ public class CRUDDesarrollador {
             cantidadDesarrolladores++;
             return cantidadDesarrolladores;
         }
-    protected static void listarDesarrollador(Desarrollador[] desarrolladores, int cantidadDesarolladores) {
+    private static void listarDesarrollador(Desarrollador[] desarrolladores, int cantidadDesarolladores) {
 
         if (cantidadDesarolladores == 0) {
             JOptionPane.showMessageDialog(null, "No hay desarrolladores registrados.");
@@ -94,7 +94,7 @@ public class CRUDDesarrollador {
         }
         JOptionPane.showMessageDialog(null, mensaje);
     }
-    public static void buscarDesarrollador(Desarrollador[] desarrolladores, int cantidadClientes){
+    private static void buscarDesarrollador(Desarrollador[] desarrolladores, int cantidadClientes){
         String documento=JOptionPane.showInputDialog("Ingrese el documento:");
         for (int i = 0; i <cantidadClientes; i++) {
             if (desarrolladores[i].getId().equals(documento)){
@@ -109,7 +109,7 @@ public class CRUDDesarrollador {
         }
         JOptionPane.showMessageDialog(null, "Desarrollador no encontrado");
     }
-    public static void actualizarDesarrollador(Desarrollador[] desarrolladores, int cantidadDesarrolladores){
+    private static void actualizarDesarrollador(Desarrollador[] desarrolladores, int cantidadDesarrolladores){
         String documento=JOptionPane.showInputDialog("Ingrese el documento/Nit:");
         for (int i = 0; i <cantidadDesarrolladores; i++) {
             if (desarrolladores[i].getId().equals(documento)){
@@ -127,7 +127,7 @@ public class CRUDDesarrollador {
             }
         }
     }
-    public static int eliminarDesarrollador(Desarrollador[] desarrolladores, int cantidadDesarrolladores){
+    private static int eliminarDesarrollador(Desarrollador[] desarrolladores, int cantidadDesarrolladores){
         String documento=JOptionPane.showInputDialog("Ingrese el documento del desarrollador:");
         for (int i = 0; i < cantidadDesarrolladores; i++) {
             if (desarrolladores[i].getId().equals(documento)){

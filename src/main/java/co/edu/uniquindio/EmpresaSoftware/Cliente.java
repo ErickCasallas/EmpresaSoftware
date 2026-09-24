@@ -8,6 +8,8 @@ public class Cliente {
     private String telefono;
     private String correo;
     private String paisProcedencia;
+    private Proyecto[] proyectos;
+    private int cantidadProyectos=0;
 
     public Cliente(String name, String id, String telefono, String correo, String paisProcedencia) {
         this.name = name;
@@ -15,12 +17,31 @@ public class Cliente {
         setTelefono(telefono);
         this.correo = correo;
         this.paisProcedencia = paisProcedencia;
+        this.proyectos = new Proyecto[20];
+        this.cantidadProyectos = 0;}
+    public boolean agregarProyecto(Proyecto proyecto) {
+        if (proyecto == null) return false;
+        if (cantidadProyectos < proyectos.length) {
+            proyectos[cantidadProyectos] = proyecto;
+            cantidadProyectos++;
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El cliente alcanzó el límite máximo de proyectos.");
+            return false;
+        }
+    }
+    public Proyecto[] getProyectos() {
+        return proyectos;
+    }
+
+    public int getCantidadProyectos() {
+        return cantidadProyectos;
     }
 
     public String getName() {
         return name;
     }
-    public void setName(String id) {
+    public void setName(String name) {
         this.name = name;
     }
     public String getId() {
@@ -52,12 +73,12 @@ public class Cliente {
         boolean valido;
         do {
             valido = true;
-            for (int i = 0; i < id.length(); i++) {
-                char caracter = id.charAt(i);
+            for (int i = 0; i < telefono.length(); i++) {
+                char caracter = telefono.charAt(i);
                 if (!Character.isDigit(caracter)) {
                     valido = false;
                     JOptionPane.showMessageDialog(null, "Numero telefono invalido");
-                    id = JOptionPane.showInputDialog("Ingrese nuevamente el telefono (solo números):");
+                    telefono = JOptionPane.showInputDialog("Ingrese nuevamente el telefono (solo números):");
                     break;
                 }
             }
