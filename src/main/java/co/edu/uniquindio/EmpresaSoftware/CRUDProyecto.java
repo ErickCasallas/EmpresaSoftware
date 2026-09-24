@@ -24,6 +24,7 @@ public class CRUDProyecto {
                             + "\n 5. Cancelar Proyecto:"
                             + "\n 6. Agregar servicios adicionales"
                             + "\n 7. Agregar desarrollador al proyecto"
+                            + "\n 8. Mostrar desarrolladores del proyecto"
                             + "\n 0. Salir del sistema:"));
 
             switch (option) {
