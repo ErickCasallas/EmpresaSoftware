@@ -173,7 +173,6 @@ public class CRUDCliente {
         }
 
         if (clienteEncontrado != null) {
-            // Solicitamos el proyecto pasando el cliente encontrado
             moduloProyecto.solicitarProyectoParaCliente(clienteEncontrado);
         } else {
             JOptionPane.showMessageDialog(null, "Cliente no encontrado.");

@@ -156,7 +156,7 @@ public class CRUDProyecto {
         return -1;
     }
 
-    private static void solicitarIdProyecto() {
+    public static void solicitarIdProyecto() {
         String idProyectoVer = JOptionPane.showInputDialog("Ingrese el id del proyecto que desea ver:");
 
         String resultado = mostrarProyectos(idProyectoVer);
@@ -289,9 +289,61 @@ public class CRUDProyecto {
                 return;
             }
         }JOptionPane.showMessageDialog(null, "ID invalido");
+    }public static void solicitarProyectoParaCliente(Cliente cliente) {
+        // 1. Crear el proyecto pidiendo los datos
+        String id = JOptionPane.showInputDialog("Ingrese el id del proyecto:");
+
+        LocalDate fechaSolicitud = null;
+        while (fechaSolicitud == null) {
+            try {
+                String input = JOptionPane.showInputDialog("Ingrese la fecha de la solicitud (AAAA-MM-DD):");
+                if (input == null) return;
+                fechaSolicitud = LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato erróneo");
+            }
+        }
+
+        LocalDate fechaInicio = null;
+        while (fechaInicio == null) {
+            try {
+                String input = JOptionPane.showInputDialog("Ingrese la fecha de inicio (AAAA-MM-DD):");
+                if (input == null) return;
+                fechaInicio = LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato erróneo");
+            }
+        }
+
+        LocalDate fechaEntrega = null;
+        while (fechaEntrega == null) {
+            try {
+                String input = JOptionPane.showInputDialog("Ingrese la fecha de entrega (AAAA-MM-DD):");
+                if (input == null) return;
+                fechaEntrega = LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato erróneo");
+            }
+        }
+
+        String estado = JOptionPane.showInputDialog("Ingrese el estado del proyecto");
+        String metodoPago = JOptionPane.showInputDialog("Ingrese el método de pago");
+
+        Proyecto proyecto = new Proyecto(id, fechaSolicitud, fechaInicio,
+                fechaEntrega, estado, metodoPago, new Servicio[4]);
+
+        // 2. Registrar en la lista general de proyectos
+        boolean registrado = registrarProyecto(proyecto.getId(), proyecto);
+
+        if (registrado) {
+            // 3. Asociar el proyecto directamente al cliente
+            cliente.agregarProyecto(proyecto);
+            JOptionPane.showMessageDialog(null, "Proyecto asignado con éxito a " + cliente.getName());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el proyecto (ID duplicado o lista llena).");
+        }
     }
 
-//    private
 }
 
 

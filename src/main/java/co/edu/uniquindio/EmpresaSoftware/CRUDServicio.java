@@ -89,25 +89,6 @@ public class CRUDServicio {
         servicios[2]=despliegueNube;
         servicios[3]=migracionDatos;
     }
-    private static void listarServicios(Servicio[] servicios) {
-
-        String mensaje = "";
-
-        for (int i = 0; i < servicios.length; i++) {
-
-            if (servicios[i] != null) {
-
-                mensaje += "ID: " + servicios[i].getId() + "\n"
-                        + "Nombre: " + servicios[i].getName() + "\n"
-                        + "Descripcion: " + servicios[i].getDescripcion() + "\n"
-                        + "Precio: " + servicios[i].getPrecio() + "\n"
-                        + "Disponibilidad: " + servicios[i].getDisponibilidad() + "\n"
-                        + "------------------------\n";
-            }
-        }
-
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
     private static int listarServicio(Servicio[] servicios,int index){
         String mensaje = "";
             if (servicios[index]!=null&&servicios[index].getDisponibilidad()){
