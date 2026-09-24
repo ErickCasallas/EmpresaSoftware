@@ -10,6 +10,7 @@ public class Proyecto {
     private String estado;
     private String metodoPago;
     private Servicio[] servicios= new Servicio[4];
+    private Desarrollador[] desarrolladores=new Desarrollador[100];
 
     public Proyecto(String id, LocalDate fechaSolicitud, LocalDate fechaInicio, LocalDate fechaEntrega, String estado, String metodoPago, Servicio[] servicios) {
         this.id = id;
@@ -80,9 +81,16 @@ public class Proyecto {
     public void agregarServicio(Servicio servicio) {
 
         for (int i = 0; i < servicios.length; i++) {
-
             if (servicios[i] == null) {
                 servicios[i] = servicio;
+                return;
+            }
+        }
+    }
+    public void agregarDesarrollador(Desarrollador desarrollador){
+        for (int i = 0; i < desarrolladores.length; i++) {
+            if (desarrolladores[i]==null){
+                desarrolladores[i]= desarrollador;
                 return;
             }
         }

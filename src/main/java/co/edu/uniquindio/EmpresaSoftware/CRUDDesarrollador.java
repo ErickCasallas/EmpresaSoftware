@@ -4,19 +4,21 @@ import javax.swing.*;
 
 public class CRUDDesarrollador {
     static Desarrollador[] desarrolladores=new Desarrollador[100];
-   public static void iniciar(){
+    static int cantidadDesarrolladores=0;
+   public static void iniciarDesarrollador(){
 
-        int cantidadDesarrolladores=0;
+
         int option;
         do {
             option = Integer.parseInt(
                     JOptionPane.showInputDialog(
                             "Desarrolladores\n\n"
-                                    + "1. Contratar desarrollador\n"
+                                    + "1. Registar desarrollador al sistema\n"
                                     + "2. Lista de desarrolladores\n"
                                     + "3. Buscar perfil de desarrollador\n"
                                     + "4. Actualizar datos de desarrollador\n"
                                     + "5. Eliminar desarrollador\n"
+                                    + "6. Agregar desarrollador a proyecto \n"
                                     + "0. Salir\n\n"
                                     + "Seleccione una opción:"
                     )
@@ -41,7 +43,8 @@ public class CRUDDesarrollador {
                 case 5:
                     cantidadDesarrolladores = eliminarDesarrollador(desarrolladores, cantidadDesarrolladores);
                     break;
-
+                case 6:
+                    break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Programa finalizado.");
                     break;
@@ -81,8 +84,8 @@ public class CRUDDesarrollador {
 
         for (int i = 0; i < desarrolladores.length; i++) {
             if (desarrolladores[i]!=null){
-                mensaje += "Cliente "+(i+1)+"\n" +"Documento/Nit: " + desarrolladores[i].getId() + "\n"
-                        +"Nombre/Razón social: " + desarrolladores[i].getName() + "\n"
+                mensaje += "Desarollador "+(i+1)+"\n" +"Documento: " + desarrolladores[i].getId() + "\n"
+                        +"Nombre: " + desarrolladores[i].getName() + "\n"
                         +"Nivel: " + desarrolladores[i].getNivel() + "\n"
                         +"Cantidad de Proyectos Silmutaneos: " + desarrolladores[i].getCantidadProyectoSilmutaneo() + "\n"
                         +"Taria del dia: " + desarrolladores[i].getTarifaDia() + "\n"
@@ -138,5 +141,16 @@ public class CRUDDesarrollador {
         }
         JOptionPane.showMessageDialog(null,"Desarrollador no encontrado");
         return cantidadDesarrolladores;
+    }
+    public static void asignarDesarrolladorProyecto(Proyecto proyecto){
+        String id=JOptionPane.showInputDialog("Ingrese el id del desarrollador");
+        for (int i = 0; i < desarrolladores.length; i++) {
+            if (desarrolladores[i]!=null&&desarrolladores[i].getId().equals(id)){
+                proyecto.agregarDesarrollador(desarrolladores[i]);
+                JOptionPane.showMessageDialog(null, "Desarrollador asignado con éxito");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Desarrollador no encontrado");
     }
 }

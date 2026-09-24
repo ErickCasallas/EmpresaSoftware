@@ -5,12 +5,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class CRUDProyecto {
+    static CRUDDesarrollador moduloDesarrollador=new CRUDDesarrollador();
     static CRUDServicio moduloServicio=new CRUDServicio();
-    static Proyecto[] listProyectos = new Proyecto[10];
+    static Desarrollador[] listDesarrolladores=new Desarrollador[100];
+    static Proyecto[] listProyectos = new Proyecto[100];
 
 
     public static void iniciar(){
-
         int option = 0;
         do {
             option = Integer.parseInt
@@ -22,6 +23,7 @@ public class CRUDProyecto {
                             + "\n 4. Actualizar proyecto: "
                             + "\n 5. Cancelar Proyecto:"
                             + "\n 6. Agregar servicios adicionales"
+                            + "\n 7. Agregar desarrollador al proyecto"
                             + "\n 0. Salir del sistema:"));
 
             switch (option) {
@@ -48,7 +50,9 @@ public class CRUDProyecto {
                 case 6:
                     agregarServicioAdicional();
                     break;
-
+                case 7:
+                    agregarDesarrollador();
+                    break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
                     break;
@@ -272,7 +276,15 @@ public class CRUDProyecto {
             }
         }JOptionPane.showMessageDialog(null, "ID invalido");
     }
-
+    public static void agregarDesarrollador(){
+        String id=JOptionPane.showInputDialog("Ingrese el ID del proyecto");
+        for (int i = 0; i < listProyectos.length; i++) {
+            if (listProyectos[i]!=null&&listProyectos[i].getId().equals(id)){
+                moduloDesarrollador.asignarDesarrolladorProyecto(listProyectos[i]);
+                return;
+            }
+        }JOptionPane.showMessageDialog(null, "ID invalido");
+    }
 }
 
 

@@ -6,14 +6,12 @@ public class Servicio {
     private String descripcion;
     private double precio;
     private boolean disponibilidad;
-    private Servicio[] servicios;
     public Servicio(String id, String name, String descripcion, double precio, boolean disponibilidad) {
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
         this.precio = precio;
         this.disponibilidad = disponibilidad;
-        this.servicios = new Servicio[4];
     }
 
     public String getId() {

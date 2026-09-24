@@ -9,6 +9,7 @@ public class Desarrollador {
     private String nivel;
     private String cantidadProyectoSilmutaneo;
     private double tarifaDia;
+    private Proyecto[] proyectos= new Proyecto[100];
 
     public Desarrollador(String id,String name, String nivel, String cantidadProyectoSilmutaneo, double tarifaDia) {
         this.name=name;

@@ -12,7 +12,7 @@ public class MainPrincipal {
         do {
             option = Integer.parseInt(
                     JOptionPane.showInputDialog(
-                            "Clientes\n\n"
+                            "Menu Principal\n\n"
                                     + "1. Modulo Clientes\n"
                                     + "2. Modulo Proyecto\n"
                                     + "3. Modulo Desarrolladores\n"
@@ -28,7 +28,7 @@ public class MainPrincipal {
                     moduloProyecto.iniciar();
                     break;
                 case 3:
-                    moduloDesarrollador.iniciar();
+                    moduloDesarrollador.iniciarDesarrollador();
                     break;
                 case 0: JOptionPane.showMessageDialog(null, "Programa finalizado.");
                     break;
