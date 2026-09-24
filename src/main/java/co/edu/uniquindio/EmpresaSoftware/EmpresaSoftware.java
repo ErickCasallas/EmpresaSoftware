@@ -1,5 +1,5 @@
 package co.edu.uniquindio.EmpresaSoftware;
-
+//Empresa asigna desarrolladores
 public class EmpresaSoftware {
     private String nit;
     private String direccion;

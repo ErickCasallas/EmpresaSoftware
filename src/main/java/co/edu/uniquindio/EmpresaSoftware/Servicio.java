@@ -4,9 +4,9 @@ public class Servicio {
     private String id;
     private String name;
     private String descripcion;
-    private String precio;
-    private String disponibilidad;
-    public Servicio(String id, String name, String descripcion, String precio, String disponibilidad) {
+    private double precio;
+    private boolean disponibilidad;
+    public Servicio(String id, String name, String descripcion, double precio, boolean disponibilidad) {
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
@@ -38,19 +38,19 @@ public class Servicio {
         this.descripcion = descripcion;
     }
 
-    public String getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
-    public String getDisponibilidad() {
+    public boolean getDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(String disponibilidad) {
+    public void setDisponibilidad(boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 }

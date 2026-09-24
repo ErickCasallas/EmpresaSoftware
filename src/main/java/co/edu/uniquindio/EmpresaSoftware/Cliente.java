@@ -1,5 +1,7 @@
 package co.edu.uniquindio.EmpresaSoftware;
 
+import javax.swing.*;
+
 public class Cliente {
     private String name;
     private String id;
@@ -9,8 +11,8 @@ public class Cliente {
 
     public Cliente(String name, String id, String telefono, String correo, String paisProcedencia) {
         this.name = name;
-        this.id = id;
-        this.telefono = telefono;
+        setId(id);
+        setTelefono(telefono);
         this.correo = correo;
         this.paisProcedencia = paisProcedencia;
     }
@@ -26,6 +28,19 @@ public class Cliente {
     }
 
     public void setId(String id) {
+        boolean valido;
+        do {
+            valido = true;
+            for (int i = 0; i < id.length(); i++) {
+                char caracter = id.charAt(i);
+                if (!Character.isDigit(caracter)) {
+                    valido = false;
+                    JOptionPane.showMessageDialog(null, "ID invalido");
+                    id = JOptionPane.showInputDialog("Ingrese nuevamente el ID (solo números):");
+                    break;
+                }
+            }
+        } while (!valido);
         this.id = id;
     }
 
@@ -34,6 +49,19 @@ public class Cliente {
     }
 
     public void setTelefono(String telefono) {
+        boolean valido;
+        do {
+            valido = true;
+            for (int i = 0; i < id.length(); i++) {
+                char caracter = id.charAt(i);
+                if (!Character.isDigit(caracter)) {
+                    valido = false;
+                    JOptionPane.showMessageDialog(null, "Numero telefono invalido");
+                    id = JOptionPane.showInputDialog("Ingrese nuevamente el telefono (solo números):");
+                    break;
+                }
+            }
+        } while (!valido);
         this.telefono = telefono;
     }
 
