@@ -28,6 +28,7 @@ public class MainPrincipal {
                 break;
                 case 2:
                     moduloProyecto.iniciar();
+                    
                     break;
                 case 3:
                     moduloDesarrollador.iniciarDesarrollador();

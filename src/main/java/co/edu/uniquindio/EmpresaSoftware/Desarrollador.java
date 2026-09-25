@@ -148,6 +148,4 @@ public class Desarrollador{
         } while (valido);
         this.equipoTrabajo = equipoTrabajo;
     }
-
-
 }

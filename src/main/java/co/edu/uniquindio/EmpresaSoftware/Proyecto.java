@@ -178,5 +178,8 @@ public class Proyecto {
         double montoDescuento = subtotal * (porcentajeDescuento / 100);
         return subtotal-montoDescuento;
     }
+    public double calcularTotal(){
+        return calcularTotal(0.0);
+    }
 }
 
