@@ -7,20 +7,49 @@ public class Desarrollador{
     private String id;
     private String name;
     private String nivel;
-    private String cantidadProyectoSilmutaneo;
+    private int cantidadProyectoSilmutaneo;
+    private int proyectosActuales;
     private String equipoTrabajo;
     private double tarifaDia;
     private boolean disponible;
 
 
-    public Desarrollador(String id,String name, String nivel, String cantidadProyectoSilmutaneo, String equipoTrabajo, double tarifaDia) {
+    public Desarrollador(String id,String name, String nivel, String equipoTrabajo, double tarifaDia) {
         this.name=name;
         setId(id);
         setNivel(nivel);
-        this.cantidadProyectoSilmutaneo = cantidadProyectoSilmutaneo;
         setEquipoTrabajo(equipoTrabajo);
         this.tarifaDia = tarifaDia;
         this.disponible=true;
+    }
+    public int getProyectosActuales() {
+        return proyectosActuales;
+    }
+
+    public int getCantidadProyectoSilmutaneo() {
+        return cantidadProyectoSilmutaneo;
+    }
+
+    public void setCantidadProyectoSilmutaneo(int cantidadProyectoSilmutaneo) {
+        this.cantidadProyectoSilmutaneo = cantidadProyectoSilmutaneo;
+    }
+
+    // Método para incrementar el contador de proyectos y verificar la disponibilidad
+    public void incrementarProyectos() {
+        this.proyectosActuales++;
+        if (this.proyectosActuales >= this.cantidadProyectoSilmutaneo) {
+            this.disponible = false; // Se marca como no disponible al llegar o superar el límite
+        }
+    }
+
+    // Método opcional por si se libera de un proyecto
+    public void decrementarProyectos() {
+        if (this.proyectosActuales > 0) {
+            this.proyectosActuales--;
+        }
+        if (this.proyectosActuales < this.cantidadProyectoSilmutaneo) {
+            this.disponible = true;
+        }
     }
     public boolean isDisponible() {
         return disponible;
@@ -72,12 +101,6 @@ public class Desarrollador{
             }
         } while (valido);
         this.nivel = nivel;
-    }
-    public String getCantidadProyectoSilmutaneo() {
-        return cantidadProyectoSilmutaneo;
-    }
-    public void setCantidadProyectoSilmutaneo(String cantidadProyectoSilmutaneo) {
-        this.cantidadProyectoSilmutaneo = cantidadProyectoSilmutaneo;
     }
     public double getTarifaDia() {
         return tarifaDia;
