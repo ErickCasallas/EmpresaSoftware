@@ -136,8 +136,6 @@ public class CRUDServicio {
             }
         return seleccion;
     }
-    //Prueba de paneles personalizados de Santiago Paez y Erick Casallas 1.0
-    //Simplicacion de codio 2.0
     public static void escogerServicioAdicional(Servicio[] servicios, Proyecto proyecto){
 
         String[] nombreBotones = new String[4];
@@ -182,8 +180,6 @@ public class CRUDServicio {
                 );
 
                 if (respuesta == JOptionPane.YES_OPTION) {
-
-                    // vuelve a mostrar los servicios
 
                 } else {
 

@@ -42,7 +42,6 @@ public class Desarrollador{
         }
     }
 
-    // Método opcional por si se libera de un proyecto
     public void decrementarProyectos() {
         if (this.proyectosActuales > 0) {
             this.proyectosActuales--;

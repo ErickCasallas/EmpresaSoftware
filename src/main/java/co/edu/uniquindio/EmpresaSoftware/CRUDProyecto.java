@@ -17,54 +17,50 @@ public class CRUDProyecto {
             option = Integer.parseInt
                     (JOptionPane.showInputDialog("Menu de los proyectos:"
                             + "\n Seleccione una opcion:"
-                            + "\n 1. Registrar proyecto:"
-                            + "\n 2. Mostrar proyectos:"
-                            + "\n 3. Buscar proyecto:"
-                            + "\n 4. Actualizar proyecto: "
-                            + "\n 5. Cancelar Proyecto:"
-                            + "\n 6. Agregar servicios adicionales"
-                            + "\n 7. Agregar desarrollador al proyecto"
-                            + "\n 8. Mostrar desarrollador en proyecto"
-                            + "\n 9. Mostrar costos"
-                            + "\n10. Mostrar total por fecha"
+                            + "\n 1. Mostrar proyectos:"
+                            + "\n 2. Buscar proyecto:"
+                            + "\n 3. Actualizar proyecto: "
+                            + "\n 4. Cancelar Proyecto:"
+                            + "\n 5. Agregar servicios adicionales"
+                            + "\n 6. Agregar desarrollador al proyecto"
+                            + "\n 7. Mostrar desarrollador en proyecto"
+                            + "\n 8. Mostrar costos"
+                            + "\n 9. Mostrar total por fecha"
                             + "\n 0. Salir del sistema:"));
 
             switch (option) {
 
                 case 1:
-                    solicitarProyecto();
-                    break;
-
-                case 2:
                     mostrarListaProyectos();
                     break;
 
-                case 3:
+                case 2:
                     solicitarIdProyecto();
                     break;
 
-                case 4:
+                case 3:
                     actualizarProyecto();
                     break;
 
-                case 5:
+                case 4:
                     eliminarProyecto();
                     break;
-                case 6:
+                case 5:
                     agregarServicioAdicional();
                     break;
-                case 7:
+                case 6:
                     agregarDesarrollador();
                     break;
 
-                case 8:
+                case 7:
                     mostrarDesarrolladoresProyecto();
                     break;
-                case 9:
+                case 8:
                     solicitarIdCosto();
                     break;
-                case 10:
+                case 9:
                     solicitarTotalPorFechaSolicitud();
+                    break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
                     break;
@@ -77,7 +73,7 @@ public class CRUDProyecto {
         } while (option != 0);
     }
 
-    public static void solicitarProyecto() {
+    public static void solicitarProyecto(Cliente clienteEncotrado) {
         String id = JOptionPane.showInputDialog("Ingrese el id del proyecto:");
 
 

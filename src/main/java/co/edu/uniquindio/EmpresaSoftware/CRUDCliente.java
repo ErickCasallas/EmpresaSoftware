@@ -49,7 +49,7 @@ public class CRUDCliente {
                     cantidadClientes = eliminarCliente(clientes, cantidadClientes);
                     break;
                 case 6:
-                    contratarProyectoACliente(clientes, cantidadClientes);
+                    contratarProyectoCliente(clientes, cantidadClientes);
                     break;
                 case 7:
                     consultarCliente();
@@ -158,7 +158,7 @@ public class CRUDCliente {
         }
         JOptionPane.showMessageDialog(null,"Cliente no encontrado");
         return cantidadClientes;}
-    public static void contratarProyectoACliente(Cliente[] clientes, int cantidadClientes) {
+    public static void contratarProyectoCliente(Cliente[] clientes, int cantidadClientes) {
         if (cantidadClientes == 0) {
             JOptionPane.showMessageDialog(null, "No hay clientes registrados.");
             return;
@@ -175,7 +175,7 @@ public class CRUDCliente {
         }
 
         if (clienteEncontrado != null) {
-            moduloProyecto.solicitarProyectoParaCliente(clienteEncontrado);
+            moduloProyecto.solicitarProyecto(clienteEncontrado);
         } else {
             JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
         }
