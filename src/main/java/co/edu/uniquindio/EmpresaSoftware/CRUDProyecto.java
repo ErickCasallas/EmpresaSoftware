@@ -332,12 +332,8 @@ public class CRUDProyecto {
 
         Proyecto proyecto = new Proyecto(id, fechaSolicitud, fechaInicio,
                 fechaEntrega, estado, metodoPago, new Servicio[4]);
-
-        // 2. Registrar en la lista general de proyectos
         boolean registrado = registrarProyecto(proyecto.getId(), proyecto);
-
         if (registrado) {
-            // 3. Asociar el proyecto directamente al cliente
             cliente.agregarProyecto(proyecto);
             JOptionPane.showMessageDialog(null, "Proyecto asignado con éxito a " + cliente.getName());
         } else {
@@ -345,6 +341,7 @@ public class CRUDProyecto {
         }
     }
     public static void mostrarDesarrolladoresProyecto() {
+        String mensaje="";
         String idProyecto = JOptionPane.showInputDialog("Ingrese el ID del proyecto:");
         int index = encontrarIndexProyecto(idProyecto);
 
@@ -356,7 +353,7 @@ public class CRUDProyecto {
                 return;
             }
 
-            String mensaje = "Desarrolladores asignados al proyecto " + proyecto.getId() + "\n";
+            mensaje = "Desarrolladores asignados al proyecto " + proyecto.getId() + "\n";
             Desarrollador[] desarrollador = proyecto.getDesarrolladores();
             for (int i = 0; i < proyecto.getCantidadDesarrolladores(); i++) {
                 if (desarrollador[i] != null) {

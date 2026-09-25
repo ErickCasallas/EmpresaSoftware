@@ -10,6 +10,7 @@ public class Desarrollador{
     private String cantidadProyectoSilmutaneo;
     private String equipoTrabajo;
     private double tarifaDia;
+    private boolean disponible;
 
 
     public Desarrollador(String id,String name, String nivel, String cantidadProyectoSilmutaneo, String equipoTrabajo, double tarifaDia) {
@@ -19,8 +20,15 @@ public class Desarrollador{
         this.cantidadProyectoSilmutaneo = cantidadProyectoSilmutaneo;
         setEquipoTrabajo(equipoTrabajo);
         this.tarifaDia = tarifaDia;
+        this.disponible=true;
+    }
+    public boolean isDisponible() {
+        return disponible;
     }
 
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
     public String getId() {
         return id;
     }

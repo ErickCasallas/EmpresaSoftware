@@ -151,8 +151,13 @@ public class CRUDDesarrollador {
         String id=JOptionPane.showInputDialog("Ingrese el id del desarrollador");
         for (int i = 0; i < desarrolladores.length; i++) {
             if (desarrolladores[i]!=null&&desarrolladores[i].getId().equals(id)){
+                if (!desarrolladores[i].isDisponible()) {
+                    JOptionPane.showMessageDialog(null,
+                            "El desarrollador " + desarrolladores[i].getName() + " NO está disponible.");
+                    return;
+                }
                 proyecto.agregarDesarrollador(desarrolladores[i]);
-                JOptionPane.showMessageDialog(null, "Desarrollador asignado con éxito");
+                JOptionPane.showMessageDialog(null, "Desarrollador asignado con éxito al proyecto.");
                 return;
             }
         }

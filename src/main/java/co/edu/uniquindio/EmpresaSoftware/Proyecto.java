@@ -126,8 +126,25 @@ public class Proyecto {
         for (int i = 0; i < desarrolladores.length; i++) {
             if (desarrolladores[i]==null){
                 desarrolladores[i]= desarrollador;
-                cantidadDesarrolladores++;
+                this.cantidadDesarrolladores++;
                 return;
+            }
+        }
+    }
+    public void cambiarEstadoProyecto(String nuevoEstado) {
+        this.estado = nuevoEstado;
+
+        if (nuevoEstado.equalsIgnoreCase("Confirmado") || nuevoEstado.equalsIgnoreCase("En curso")) {
+            for (int i = 0; i < cantidadDesarrolladores; i++) {
+                if (desarrolladores[i] != null) {
+                    desarrolladores[i].setDisponible(false); // Pasa a false al confirmarse
+                }
+            }
+        } else if (nuevoEstado.equalsIgnoreCase("Finalizado") || nuevoEstado.equalsIgnoreCase("Cancelado")) {
+            for (int i = 0; i < cantidadDesarrolladores; i++) {
+                if (desarrolladores[i] != null) {
+                    desarrolladores[i].setDisponible(true); // Vuelve a true al finalizar o cancelar
+                }
             }
         }
     }
