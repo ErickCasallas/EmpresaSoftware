@@ -24,6 +24,8 @@ public class CRUDProyecto {
                             + "\n 5. Cancelar Proyecto:"
                             + "\n 6. Agregar servicios adicionales"
                             + "\n 7. Agregar desarrollador al proyecto"
+                            + "\n 8. Mostrar desarrollador en proyecto"
+                            + "\n 9. Mostras costos"
                             + "\n 0. Salir del sistema:"));
 
             switch (option) {
@@ -56,6 +58,9 @@ public class CRUDProyecto {
 
                 case 8:
                     mostrarDesarrolladoresProyecto();
+                    break;
+                case 9:
+                    solicitarIdCosto();
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
@@ -369,6 +374,22 @@ public class CRUDProyecto {
         } else {
             JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado.");
         }
+    }
+
+    private static void solicitarIdCosto() {
+        String idBuscado = JOptionPane.showInputDialog("Ingrese el id del proyecto");
+        if (idBuscado != null && !idBuscado.equals("")) {
+            int index = encontrarIndexProyecto(idBuscado);
+
+            if (index != -1) {
+                double total = listProyectos[index].calcularTotal();
+                JOptionPane.showMessageDialog(null, "EL costo total del proyecto:  " + idBuscado + "es: $  " + total);
+            } else {
+                JOptionPane.showMessageDialog(null, "Proyecto no encontrado");
+            }
+
+        }
+
     }
 
 }
