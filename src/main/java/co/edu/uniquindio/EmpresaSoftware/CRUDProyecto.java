@@ -3,15 +3,16 @@ package co.edu.uniquindio.EmpresaSoftware;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 public class CRUDProyecto {
-    static CRUDDesarrollador moduloDesarrollador=new CRUDDesarrollador();
-    static CRUDServicio moduloServicio=new CRUDServicio();
-    static Desarrollador[] listDesarrolladores=new Desarrollador[100];
+    static CRUDDesarrollador moduloDesarrollador = new CRUDDesarrollador();
+    static CRUDServicio moduloServicio = new CRUDServicio();
+    static Desarrollador[] listDesarrolladores = new Desarrollador[100];
     static Proyecto[] listProyectos = new Proyecto[100];
 
 
-    public static void iniciar(){
+    public static void iniciar() {
         int option = 0;
         do {
             option = Integer.parseInt
@@ -24,6 +25,8 @@ public class CRUDProyecto {
                             + "\n 5. Cancelar Proyecto:"
                             + "\n 6. Agregar servicios adicionales"
                             + "\n 7. Agregar desarrollador al proyecto"
+                            + "\n 8. Mostrar desarrolladores"
+                            + "\n 9. Mostrar costo total"
                             + "\n 0. Salir del sistema:"));
 
             switch (option) {
@@ -40,8 +43,8 @@ public class CRUDProyecto {
                     solicitarIdProyecto();
                     break;
 
-               case 4:
-                   actualizarProyecto();
+                case 4:
+                    actualizarProyecto();
                     break;
 
                 case 5:
@@ -53,9 +56,11 @@ public class CRUDProyecto {
                 case 7:
                     agregarDesarrollador();
                     break;
-
                 case 8:
                     mostrarDesarrolladoresProyecto();
+                    break;
+                case 9:
+                    solicitarIdCosto();
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
@@ -81,8 +86,7 @@ public class CRUDProyecto {
                     return;
                 }
                 fechaSolicitud = LocalDate.parse(input);
-            }
-            catch(DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 JOptionPane.showMessageDialog(null, "Formato erroneo");
             }
 
@@ -97,8 +101,7 @@ public class CRUDProyecto {
                     return;
                 }
                 fechaInicio = LocalDate.parse(input);
-            }
-            catch(DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 JOptionPane.showMessageDialog(null, "Formato erroneo");
             }
         }
@@ -112,8 +115,7 @@ public class CRUDProyecto {
                     return;
                 }
                 fechaEntrega = LocalDate.parse(input);
-            }
-            catch(DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 JOptionPane.showMessageDialog(null, "Formato erroneo");
             }
         }
@@ -123,7 +125,7 @@ public class CRUDProyecto {
         String metodoPago = JOptionPane.showInputDialog("Ingrese el metodo de pago (Tarjeta - Efectivo - Transferencia):");
 
         Proyecto proyecto = new Proyecto(id, fechaSolicitud, fechaInicio,
-                fechaEntrega, estado, metodoPago,new Servicio[4]);
+                fechaEntrega, estado, metodoPago, new Servicio[4]);
 
         boolean resultado = registrarProyecto(proyecto.getId(), proyecto);
 
@@ -201,14 +203,14 @@ public class CRUDProyecto {
         JOptionPane.showMessageDialog(null, mensaje);
     }
 
-    private static void actualizarProyecto(){
+    private static void actualizarProyecto() {
         String idProyectoActualizar = JOptionPane.showInputDialog("Ingrese el id del proyecto que deseaActualizar");
         int index = encontrarIndexProyecto(idProyectoActualizar);
 
-        if (index != -1){
+        if (index != -1) {
             actualizarDatosProyecto(index);
         } else {
-            JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado: " );
+            JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado: ");
         }
     }
 
@@ -262,34 +264,40 @@ public class CRUDProyecto {
         listProyectos[indexProyecto].setMetodoPago(metodoPago);
     }
 
-    private static void eliminarProyecto(){
+    private static void eliminarProyecto() {
         String idProyectoBorrar = JOptionPane.showInputDialog("Ingrese el id del proyecto que desea eliminar:");
         int index = encontrarIndexProyecto(idProyectoBorrar);
 
-        if (index != -1){
+        if (index != -1) {
             listProyectos[index] = null;
         } else {
             JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado.");
         }
     }
-    private static void agregarServicioAdicional(){
-        String id=JOptionPane.showInputDialog("Ingrese el ID del proyecto");
+
+    private static void agregarServicioAdicional() {
+        String id = JOptionPane.showInputDialog("Ingrese el ID del proyecto");
         for (int i = 0; i < listProyectos.length; i++) {
-            if (listProyectos[i]!=null&&listProyectos[i].getId().equals(id)){
+            if (listProyectos[i] != null && listProyectos[i].getId().equals(id)) {
                 moduloServicio.iniciar(listProyectos[i]);
                 return;
             }
-        }JOptionPane.showMessageDialog(null, "ID invalido");
+        }
+        JOptionPane.showMessageDialog(null, "ID invalido");
     }
-    private static void agregarDesarrollador(){
-        String id=JOptionPane.showInputDialog("Ingrese el ID del proyecto");
+
+    private static void agregarDesarrollador() {
+        String id = JOptionPane.showInputDialog("Ingrese el ID del proyecto");
         for (int i = 0; i < listProyectos.length; i++) {
-            if (listProyectos[i]!=null&&listProyectos[i].getId().equals(id)){
+            if (listProyectos[i] != null && listProyectos[i].getId().equals(id)) {
                 moduloDesarrollador.asignarDesarrolladorProyecto(listProyectos[i]);
                 return;
             }
-        }JOptionPane.showMessageDialog(null, "ID invalido");
-    }public static void solicitarProyectoParaCliente(Cliente cliente) {
+        }
+        JOptionPane.showMessageDialog(null, "ID invalido");
+    }
+
+    public static void solicitarProyectoParaCliente(Cliente cliente) {
         // 1. Crear el proyecto pidiendo los datos
         String id = JOptionPane.showInputDialog("Ingrese el id del proyecto:");
 
@@ -343,6 +351,7 @@ public class CRUDProyecto {
             JOptionPane.showMessageDialog(null, "No se pudo registrar el proyecto (ID duplicado o lista llena).");
         }
     }
+
     public static void mostrarDesarrolladoresProyecto() {
         String idProyecto = JOptionPane.showInputDialog("Ingrese el ID del proyecto:");
         int index = encontrarIndexProyecto(idProyecto);
@@ -360,9 +369,9 @@ public class CRUDProyecto {
             for (int i = 0; i < proyecto.getCantidadDesarrolladores(); i++) {
                 if (desarrollador[i] != null) {
                     mensaje += (i + 1) + ". ID: " + desarrollador[i].getId()
-                            + "Nombre: " + desarrollador[i].getName()+"\n"
-                            + "Nivel: " + desarrollador[i].getNivel()+"\n"
-                            + "Equipo de trabajo " + desarrollador[i].getEquipoTrabajo()+"\n"
+                            + "Nombre: " + desarrollador[i].getName() + "\n"
+                            + "Nivel: " + desarrollador[i].getNivel() + "\n"
+                            + "Equipo de trabajo " + desarrollador[i].getEquipoTrabajo() + "\n"
                             + "Tarifa Día: $" + desarrollador[i].getTarifaDia() + "\n"
                             + "---------------------------------------------------\n";
                 }
@@ -374,6 +383,21 @@ public class CRUDProyecto {
         }
     }
 
+    private static void solicitarIdCosto() {
+        String idBuscado = JOptionPane.showInputDialog("Ingrese el id del proyecto");
+        if (idBuscado != null && !idBuscado.equals("")) {
+            int index = encontrarIndexProyecto(idBuscado);
+
+            if (index != -1) {
+                double total = listProyectos[index].calcularTotal();
+                JOptionPane.showMessageDialog(null, "EL costo total del proyecto:  " + idBuscado + "es: $  " + total);
+            } else {
+                JOptionPane.showMessageDialog(null, "Proyecto no encontrado");
+            }
+            
+        }
+
+    }
 }
 
 
