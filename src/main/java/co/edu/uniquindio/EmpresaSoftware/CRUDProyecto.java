@@ -378,21 +378,40 @@ public class CRUDProyecto {
 
     private static void solicitarIdCosto() {
         String idBuscado = JOptionPane.showInputDialog("Ingrese el id del proyecto");
+
         if (idBuscado != null && !idBuscado.equals("")) {
             int index = encontrarIndexProyecto(idBuscado);
 
             if (index != -1) {
-                double total = listProyectos[index].calcularTotal();
-                JOptionPane.showMessageDialog(null, "EL costo total del proyecto:  " + idBuscado + "es: $  " + total);
+
+                String inputDescuento = JOptionPane.showInputDialog("Ingrese el porcentaje de descuento de 0 a 100");
+                double porcentaje = 0.0;
+                try{
+                if(inputDescuento!= null && !inputDescuento.equals("")){
+                    porcentaje = Double.parseDouble(inputDescuento);
+                }
+                } catch (NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Valor invalido descuento aplicado 0%");
+                porcentaje = 0.0;
+                }
+
+                double totalFinal = listProyectos[index].calcularTotal(porcentaje);
+
+                String factura = "=== COSTOS DETALLADOS " + listProyectos[index].getId() + "====\n"
+                                + "-Dias de desarrollo:  " + listProyectos[index].getDiasDesarrollo() + "Dias\n"
+                                +"-Descuento aplicado: " + porcentaje + "%\n"
+                                + "--------------------------------------\n"
+                                + "TOTAL A PAGAR: $ " + totalFinal;
+                JOptionPane.showMessageDialog(null, factura);
             } else {
                 JOptionPane.showMessageDialog(null, "Proyecto no encontrado");
             }
-
         }
-
     }
 
 }
+
+
 
 
 

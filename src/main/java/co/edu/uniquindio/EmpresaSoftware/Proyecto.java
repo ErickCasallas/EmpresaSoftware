@@ -151,7 +151,9 @@ public class Proyecto {
             this.diasDesarrollo = diasDesarrollo;
         }
 
-    public double calcularTotal(){
+    public double calcularTotal(double porcentajeDescuento){
+        calcularDiasDesarrollo();
+
         double sumaTarifasD = 0;
         if (this.desarrolladores!=null){
             for (int i = 0; i < this.desarrolladores.length;i++){
@@ -172,7 +174,9 @@ public class Proyecto {
                 }
             }
         }
-        return costoSericios + costoDesarrolladores;
+        double subtotal = costoDesarrolladores + costoSericios;
+        double montoDescuento = subtotal * (porcentajeDescuento / 100);
+        return subtotal-montoDescuento;
     }
 }
 
