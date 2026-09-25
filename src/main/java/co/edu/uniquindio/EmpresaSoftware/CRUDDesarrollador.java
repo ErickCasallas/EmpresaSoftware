@@ -54,26 +54,26 @@ public class CRUDDesarrollador {
             }
             }while (option!=0);
         }
-        private static int registrarDesarrollador(Desarrollador[] desarrolladors,int cantidadDesarrolladores) {
-            String id=JOptionPane.showInputDialog("Ingrese su codigo de ID: ");
-            //Verificar que no haya un mismo cliente
-            for (int i = 0; i < cantidadDesarrolladores; i++) {
-                if (desarrolladors[i].getId().equals(id)) {
-                    JOptionPane.showMessageDialog(null,"Ya existe un desarrollador con ese documento");
-                    return cantidadDesarrolladores;
-                }
+    private static int registrarDesarrollador(Desarrollador[] desarrolladors, int cantidadDesarrolladores) {
+        String id = JOptionPane.showInputDialog("Ingrese su codigo de ID: ");
+        for (int i = 0; i < cantidadDesarrolladores; i++) {
+            if (desarrolladors[i].getId().equals(id)) {
+                JOptionPane.showMessageDialog(null, "Ya existe un desarrollador con ese documento");
+                return cantidadDesarrolladores;
             }
-            String name=JOptionPane.showInputDialog("Ingrese su nombre: ");
-            String nivel=JOptionPane.showInputDialog("Ingrese el nivel (Junior - Semisenior - Senior): ");
-            String cantidadProyectoSilmutaneo=JOptionPane.showInputDialog("Ingrese proyectos silmutaneo");
-            String equipoTrabajo=JOptionPane.showInputDialog("Ingrese el equipo de trabajo (Fronted - Backend - Mobile Devs - DevOps - QA): ");
-            double tarifaDia=Double.parseDouble(JOptionPane.showInputDialog("La tarifa del dia"));
-            Desarrollador nuevoDesarollador= new Desarrollador(id, name, nivel, cantidadProyectoSilmutaneo,equipoTrabajo, tarifaDia);
-            desarrolladors[cantidadDesarrolladores]=nuevoDesarollador;
-            JOptionPane.showMessageDialog(null, "Desarrollador registrado correctamente.");
-            cantidadDesarrolladores++;
-            return cantidadDesarrolladores;
         }
+        String name = JOptionPane.showInputDialog("Ingrese su nombre: ");
+        String nivel = JOptionPane.showInputDialog("Ingrese el nivel (Junior - Semisenior - Senior): ");
+        int cantidadProyectoSilmutaneo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad máxima de proyectos simultáneos (ej: 3):"));
+        String equipoTrabajo = JOptionPane.showInputDialog("Ingrese el equipo de trabajo (Fronted - Backend - Mobile Devs - DevOps - QA): ");
+        double tarifaDia = Double.parseDouble(JOptionPane.showInputDialog("La tarifa del dia"));
+
+        Desarrollador nuevoDesarollador = new Desarrollador(id, name, nivel, equipoTrabajo, tarifaDia);
+        desarrolladors[cantidadDesarrolladores] = nuevoDesarollador;
+        JOptionPane.showMessageDialog(null, "Desarrollador registrado correctamente.");
+        cantidadDesarrolladores++;
+        return cantidadDesarrolladores;
+    }
     private static void listarDesarrollador(Desarrollador[] desarrolladores, int cantidadDesarolladores) {
 
         if (cantidadDesarolladores == 0) {
@@ -119,12 +119,10 @@ public class CRUDDesarrollador {
                 String nombre=JOptionPane.showInputDialog("Ingrese el nombre del desarrollador", desarrolladores[i].getName());
                 String id=JOptionPane.showInputDialog("Ingrese el documento del desarrollador", desarrolladores[i].getId());
                 String nivel=JOptionPane.showInputDialog("Ingrese el nivel:", desarrolladores[i].getNivel());
-                String cantidadProyectoSilmutaneo=JOptionPane.showInputDialog("Ingrese la cantidad de Proyectos Silmutaneos:",desarrolladores[i].getCantidadProyectoSilmutaneo());
                 String equipoDeTrabajo=JOptionPane.showInputDialog("Ingrese el equipo de trabajo: ", desarrolladores[i].getEquipoTrabajo());
                 double tarifaDia=Double.parseDouble(JOptionPane.showInputDialog("Ingrese el pais de procedencia:",desarrolladores[i].getTarifaDia()));
                 desarrolladores[i].setName(nombre);
-                desarrolladores[i].setNivel(nivel);
-                desarrolladores[i].setCantidadProyectoSilmutaneo(cantidadProyectoSilmutaneo);
+                desarrolladores[i].setNivel(nivel);;
                 desarrolladores[i].setEquipoTrabajo(equipoDeTrabajo);
                 desarrolladores[i].setTarifaDia(tarifaDia);
                 desarrolladores[i].setId(id);
@@ -157,6 +155,7 @@ public class CRUDDesarrollador {
                     return;
                 }
                 proyecto.agregarDesarrollador(desarrolladores[i]);
+                desarrolladores[i].incrementarProyectos();
                 JOptionPane.showMessageDialog(null, "Desarrollador asignado con éxito al proyecto.");
                 return;
             }

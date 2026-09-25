@@ -24,8 +24,6 @@ public class CRUDProyecto {
                             + "\n 5. Cancelar Proyecto:"
                             + "\n 6. Agregar servicios adicionales"
                             + "\n 7. Agregar desarrollador al proyecto"
-                            + "\n 8. Mostrar desarrolladores"
-                            + "\n 9. Mostrar costo total"
                             + "\n 0. Salir del sistema:"));
 
             switch (option) {
@@ -58,9 +56,6 @@ public class CRUDProyecto {
 
                 case 8:
                     mostrarDesarrolladoresProyecto();
-                    break;
-                case 9:
-                    solicitarIdCosto();
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "El programa finalizo.");
@@ -375,42 +370,7 @@ public class CRUDProyecto {
             JOptionPane.showMessageDialog(null, "El proyecto no fue encontrado.");
         }
     }
-    private static void solicitarIdCosto() {
 
-        String idBuscado = JOptionPane.showInputDialog("Ingrese el id del proyecto");
-
-        if (idBuscado != null && !idBuscado.equals("")) {
-            int index = encontrarIndexProyecto(idBuscado);
-
-            if (index != -1) {
-
-                String inputDescuento = JOptionPane.showInputDialog("Ingrese el porcentaje de descuento (0 a 100)");
-                double porcentaje = 0.0;
-
-                try {
-                    if (inputDescuento != null && !inputDescuento.equals("")){
-                        porcentaje = Double.parseDouble(inputDescuento);
-                    }
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null,"Valor invalido se aplicara el 0% de descuento");
-                    porcentaje = 0.0;
-                }
-
-                double totalFinal = listProyectos[index].calcularTotal(porcentaje);
-
-                String factura = "===COSTOS DETALLADOS " + listProyectos[index].getId() + "====\n" +
-                                "-Dias de desarrollo " + listProyectos[index].getDiasDesarrollo() + " dias\n" +
-                                "Descuentp aplicado: " + porcentaje + "%\n"+
-                                "-----------------------------------------\n"+
-                                "TOTAL A PAGAR: $" + totalFinal;
-
-                JOptionPane.showMessageDialog(null, factura);
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Proyecto no encontrado");
-            }
-        }
-    }
 }
 
 

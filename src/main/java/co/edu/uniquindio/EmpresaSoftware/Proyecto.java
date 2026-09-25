@@ -2,7 +2,6 @@ package co.edu.uniquindio.EmpresaSoftware;
 
 import javax.swing.*;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 public class Proyecto {
     private String id;
@@ -14,8 +13,6 @@ public class Proyecto {
     private Servicio[] servicios= new Servicio[4];
     private Desarrollador[] desarrolladores=new Desarrollador[100];
     int cantidadDesarrolladores;
-    private int diasDesarrollo;
-
 
     public Proyecto(String id, LocalDate fechaSolicitud, LocalDate fechaInicio, LocalDate fechaEntrega, String estado, String metodoPago, Servicio[] servicios) {
         this.id = id;
@@ -26,10 +23,7 @@ public class Proyecto {
         setMetodoPago(metodoPago);
         this.servicios=servicios;
         this.cantidadDesarrolladores=0;
-        calcularDiasDesarrollo();
     }
-
-
     public Desarrollador[] getDesarrolladores(){
         return this.desarrolladores;
     }
@@ -53,14 +47,12 @@ public class Proyecto {
     }
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
-        calcularDiasDesarrollo();
     }
     public LocalDate getFechaEntrega() {
         return fechaEntrega;
     }
     public void setFechaEntrega(LocalDate fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
-        calcularDiasDesarrollo();
     }
     public String getEstado() {
         return estado;
@@ -138,43 +130,5 @@ public class Proyecto {
                 return;
             }
         }
-    }
-    public void calcularDiasDesarrollo(){
-        if ( fechaInicio != null && fechaEntrega!= null ){
-            diasDesarrollo = (int) ChronoUnit.DAYS.between(fechaInicio, fechaEntrega);
-        } else {
-            diasDesarrollo = 0;
-        }
-    }
-    public int getDiasDesarrollo(){
-        return diasDesarrollo;
-    }
-    public void setDiasDesarrollo(int diasDesarrollo) {
-        this.diasDesarrollo = diasDesarrollo;
-    }
-
-
-    public double calcularTotal(){
-        double sumaTarifasD = 0;
-        if (this.desarrolladores!=null){
-            for (int i = 0; i < this.desarrolladores.length;i++){
-                if (this.desarrolladores[i]!=null){
-                    sumaTarifasD += this.desarrolladores[i].getTarifaDia();
-                }
-            }
-        }
-
-        double costoDesarrolladores = sumaTarifasD * this.diasDesarrollo;
-
-        double costoSericios = 0;
-
-        if (this.servicios != null){
-            for (int j = 0; j < this.servicios.length;j++){
-                if (this.servicios[j]!=null){
-                    costoSericios +=this.servicios[j].getPrecio();
-                }
-            }
-        }
-        return costoSericios + costoDesarrolladores;
     }
 }
