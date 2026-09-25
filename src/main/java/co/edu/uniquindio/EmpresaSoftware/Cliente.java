@@ -5,13 +5,13 @@ import javax.swing.*;
 public class Cliente {
     private String name;
     private String id;
-    private String telefono;
+    private long telefono;
     private String correo;
     private String paisProcedencia;
     private Proyecto[] proyectos;
     private int cantidadProyectos=0;
 
-    public Cliente(String name, String id, String telefono, String correo, String paisProcedencia) {
+    public Cliente(String name, String id, long telefono, String correo, String paisProcedencia) {
         this.name = name;
         setId(id);
         setTelefono(telefono);
@@ -65,24 +65,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public String getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
-        boolean valido;
-        do {
-            valido = true;
-            for (int i = 0; i < telefono.length(); i++) {
-                char caracter = telefono.charAt(i);
-                if (!Character.isDigit(caracter)) {
-                    valido = false;
-                    JOptionPane.showMessageDialog(null, "Numero telefono invalido");
-                    telefono = JOptionPane.showInputDialog("Ingrese nuevamente el telefono (solo números):");
-                    break;
-                }
-            }
-        } while (!valido);
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
